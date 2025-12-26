@@ -67,7 +67,7 @@ const Profile = () => {
   const fetchUserProfile = async () => {
     try {
       setLoading(true)
-      const res = await axios.get('/api/auth/me', getAuthHeader())
+      const res = await axios.get('/auth/me', getAuthHeader())
       if (res.data.success) {
         const userData = res.data.data
         setUser(userData)
@@ -93,7 +93,7 @@ const Profile = () => {
     e.preventDefault()
     try {
       setSaving(true)
-      const res = await axios.put('/api/auth/profile', {
+      const res = await axios.put('/auth/profile', {
         firstName: profileForm.firstName,
         lastName: profileForm.lastName,
         phone: profileForm.phone,
@@ -126,7 +126,7 @@ const Profile = () => {
     
     try {
       setSaving(true)
-      const res = await axios.put('/api/auth/change-password', {
+      const res = await axios.put('/auth/change-password', {
         currentPassword: passwordForm.currentPassword,
         newPassword: passwordForm.newPassword
       }, getAuthHeader())

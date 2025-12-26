@@ -52,11 +52,11 @@ const IBManagement = () => {
     try {
       setLoading(true)
       const [statsRes, ibsRes, referralsRes, commissionsRes, withdrawalsRes] = await Promise.all([
-        axios.get('/api/admin/ib/stats', getAuthHeader()),
-        axios.get('/api/admin/ib/list', getAuthHeader()),
-        axios.get('/api/admin/ib/referrals/all', getAuthHeader()),
-        axios.get('/api/admin/ib/commissions/all', getAuthHeader()),
-        axios.get('/api/admin/ib/withdrawals/all', getAuthHeader())
+        axios.get('/admin/ib/stats', getAuthHeader()),
+        axios.get('/admin/ib/list', getAuthHeader()),
+        axios.get('/admin/ib/referrals/all', getAuthHeader()),
+        axios.get('/admin/ib/commissions/all', getAuthHeader()),
+        axios.get('/admin/ib/withdrawals/all', getAuthHeader())
       ])
       if (statsRes.data.success) setStats(statsRes.data.data)
       if (ibsRes.data.success) setIbs(ibsRes.data.data)

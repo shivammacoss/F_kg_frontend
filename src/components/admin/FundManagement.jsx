@@ -40,8 +40,8 @@ const FundManagement = () => {
     try {
       setLoading(true)
       const [depRes, withRes] = await Promise.all([
-        axios.get('/api/admin/wallet/deposits', getAuthHeader()),
-        axios.get('/api/admin/wallet/withdrawals', getAuthHeader())
+        axios.get('/admin/wallet/deposits', getAuthHeader()),
+        axios.get('/admin/wallet/withdrawals', getAuthHeader())
       ])
       if (depRes.data.success) setDeposits(depRes.data.data || [])
       if (withRes.data.success) setWithdrawals(withRes.data.data || [])

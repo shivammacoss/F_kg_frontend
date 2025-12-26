@@ -75,8 +75,8 @@ const TradeManagement = () => {
     try {
       setLoading(true)
       const [tradesRes, usersRes] = await Promise.all([
-        axios.get('/api/admin/trades', getAuthHeader()),
-        axios.get('/api/admin/users?limit=1000', getAuthHeader())
+        axios.get('/admin/trades', getAuthHeader()),
+        axios.get('/admin/users?limit=1000', getAuthHeader())
       ])
       if (tradesRes.data.success) {
         setTrades(tradesRes.data.data || [])
@@ -100,7 +100,7 @@ const TradeManagement = () => {
     e.preventDefault()
     try {
       setActionLoading('create')
-      const res = await axios.post('/api/admin/trades', createForm, getAuthHeader())
+      const res = await axios.post('/admin/trades', createForm, getAuthHeader())
       if (res.data.success) {
         alert('Trade created successfully!')
         setShowCreateModal(false)

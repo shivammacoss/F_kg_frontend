@@ -59,10 +59,10 @@ const MobileWallet = () => {
     try {
       setLoading(true)
       const [balanceRes, settingsRes, accountsRes, transRes] = await Promise.all([
-        axios.get('/api/wallet/balance', getAuthHeader()),
-        axios.get('/api/wallet/bank-settings', getAuthHeader()),
-        axios.get('/api/wallet/bank-accounts', getAuthHeader()),
-        axios.get('/api/wallet/transactions?limit=20', getAuthHeader())
+        axios.get('/wallet/balance', getAuthHeader()),
+        axios.get('/wallet/bank-settings', getAuthHeader()),
+        axios.get('/wallet/bank-accounts', getAuthHeader()),
+        axios.get('/wallet/transactions?limit=20', getAuthHeader())
       ])
 
       if (balanceRes.data.success) setBalance(balanceRes.data.data.balance)
@@ -95,7 +95,7 @@ const MobileWallet = () => {
     if (!depositAmount || parseFloat(depositAmount) <= 0) return alert('Enter valid amount')
     try {
       setSubmitting(true)
-      const res = await axios.post('/api/wallet/deposit', {
+      const res = await axios.post('/wallet/deposit', {
         amount: usdEquivalent,
         originalAmount: parseFloat(depositAmount),
         originalCurrency: depositCurrency,
@@ -120,7 +120,7 @@ const MobileWallet = () => {
     if (!selectedBankAccount) return alert('Select a bank account')
     try {
       setSubmitting(true)
-      const res = await axios.post('/api/wallet/withdraw', {
+      const res = await axios.post('/wallet/withdraw', {
         amount: parseFloat(withdrawAmount),
         withdrawalMethod: 'bank',
         bankAccountId: selectedBankAccount
@@ -141,7 +141,7 @@ const MobileWallet = () => {
   const handleAddBankAccount = async () => {
     try {
       setSubmitting(true)
-      const res = await axios.post('/api/wallet/bank-accounts', newBankAccount, getAuthHeader())
+      const res = await axios.post('/wallet/bank-accounts', newBankAccount, getAuthHeader())
       if (res.data.success) {
         setUserBankAccounts([...userBankAccounts, res.data.data])
         setShowAddBank(false)

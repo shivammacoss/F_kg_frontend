@@ -51,8 +51,8 @@ const MobileCopyTrade = ({ onBack }) => {
       setLoading(true)
       const [mastersRes, followsRes, statusRes] = await Promise.all([
         axios.get(`/api/copy-trade/masters?sort=${sortBy}${riskFilter !== 'all' ? `&riskLevel=${riskFilter}` : ''}`, getAuthHeader()),
-        axios.get('/api/copy-trade/my-follows', getAuthHeader()),
-        axios.get('/api/copy-trade/my-master-status', getAuthHeader())
+        axios.get('/copy-trade/my-follows', getAuthHeader()),
+        axios.get('/copy-trade/my-master-status', getAuthHeader())
       ])
 
       if (mastersRes.data.success) setMasters(mastersRes.data.data || [])
@@ -124,7 +124,7 @@ const MobileCopyTrade = ({ onBack }) => {
     }
     try {
       setSubmitting(true)
-      const res = await axios.post('/api/copy-trade/request-master', {
+      const res = await axios.post('/copy-trade/request-master', {
         ...requestForm,
         riskDisclosureAccepted: 'true',
         termsAccepted: 'true'
@@ -664,7 +664,7 @@ const MobileMasterDashboard = ({ masterProfile }) => {
 
   const fetchDashboard = async () => {
     try {
-      const res = await axios.get('/api/copy-trade/master/dashboard', getAuthHeader())
+      const res = await axios.get('/copy-trade/master/dashboard', getAuthHeader())
       if (res.data.success) setDashboardData(res.data.data)
     } catch (err) {
       console.error('Failed to fetch dashboard:', err)
@@ -677,7 +677,7 @@ const MobileMasterDashboard = ({ masterProfile }) => {
     if (!withdrawAmount || parseFloat(withdrawAmount) <= 0) return
     try {
       setSubmitting(true)
-      const res = await axios.post('/api/copy-trade/master/withdraw-commission', { amount: parseFloat(withdrawAmount) }, getAuthHeader())
+      const res = await axios.post('/copy-trade/master/withdraw-commission', { amount: parseFloat(withdrawAmount) }, getAuthHeader())
       if (res.data.success) {
         alert(res.data.message)
         setWithdrawAmount('')

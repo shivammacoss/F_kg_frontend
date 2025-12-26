@@ -42,7 +42,7 @@ const BankSettings = () => {
   const fetchSettings = async () => {
     try {
       setLoading(true)
-      const res = await axios.get('/api/admin/wallet/bank-settings', getAuthHeader())
+      const res = await axios.get('/admin/wallet/bank-settings', getAuthHeader())
       if (res.data.success) {
         setSettings(res.data.data)
       }
@@ -56,7 +56,7 @@ const BankSettings = () => {
   const handleSave = async () => {
     try {
       setSaving(true)
-      const res = await axios.put('/api/admin/wallet/bank-settings', settings, getAuthHeader())
+      const res = await axios.put('/admin/wallet/bank-settings', settings, getAuthHeader())
       if (res.data.success) {
         alert('Bank settings saved successfully!')
       }

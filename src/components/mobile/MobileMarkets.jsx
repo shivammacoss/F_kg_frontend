@@ -24,7 +24,7 @@ const MobileMarkets = ({ onSelect, selectedSymbol }) => {
       const token = localStorage.getItem('token')
       if (!token) return
       try {
-        const res = await axios.get('/api/trades/prices', {
+        const res = await axios.get('/trades/prices', {
           headers: { Authorization: `Bearer ${token}` }
         })
         if (res.data.success) {

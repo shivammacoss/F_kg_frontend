@@ -49,14 +49,14 @@ const OverviewDashboard = () => {
 
     try {
       // Fetch dashboard stats
-      const dashRes = await axios.get('/api/admin/dashboard', getAuthHeader())
+      const dashRes = await axios.get('/admin/dashboard', getAuthHeader())
       console.log('[AdminDashboard] Stats response:', dashRes.data)
       if (dashRes.data.success) {
         setStats(dashRes.data.data)
       }
 
       // Fetch users
-      const usersRes = await axios.get('/api/admin/users?limit=5', getAuthHeader())
+      const usersRes = await axios.get('/admin/users?limit=5', getAuthHeader())
       console.log('[AdminDashboard] Users response:', usersRes.data)
       if (usersRes.data.success) {
         setRecentUsers(usersRes.data.data.users || [])
@@ -64,7 +64,7 @@ const OverviewDashboard = () => {
 
       // Fetch trades
       try {
-        const tradesRes = await axios.get('/api/admin/trades?limit=10', getAuthHeader())
+        const tradesRes = await axios.get('/admin/trades?limit=10', getAuthHeader())
         console.log('[AdminDashboard] Trades response:', tradesRes.data)
         if (tradesRes.data.success) {
           setRecentTrades(tradesRes.data.data?.trades || tradesRes.data.data || [])
@@ -75,7 +75,7 @@ const OverviewDashboard = () => {
 
       // Fetch pending transactions
       try {
-        const transRes = await axios.get('/api/admin/transactions/pending', getAuthHeader())
+        const transRes = await axios.get('/admin/transactions/pending', getAuthHeader())
         console.log('[AdminDashboard] Transactions response:', transRes.data)
         if (transRes.data.success) {
           setPendingTransactions(transRes.data.data || [])

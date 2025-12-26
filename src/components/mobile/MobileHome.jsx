@@ -35,7 +35,7 @@ const MobileHome = () => {
       
       try {
         // Fetch user profile
-        const profileRes = await axios.get('/api/auth/me', getAuthHeader())
+        const profileRes = await axios.get('/auth/me', getAuthHeader())
         let balance = 0
         let name = 'Trader'
         
@@ -46,7 +46,7 @@ const MobileHome = () => {
 
         // Fetch trades for stats
         try {
-          const tradesRes = await axios.get('/api/trades', getAuthHeader())
+          const tradesRes = await axios.get('/trades', getAuthHeader())
           if (tradesRes.data.success) {
             const tradesData = tradesRes.data.data?.trades || tradesRes.data.data || []
             const trades = Array.isArray(tradesData) ? tradesData : []
@@ -114,8 +114,8 @@ const MobileHome = () => {
       setNewsLoading(true)
       try {
         const [newsRes, calendarRes] = await Promise.all([
-          axios.get('/api/market/news'),
-          axios.get('/api/market/calendar')
+          axios.get('/market/news'),
+          axios.get('/market/calendar')
         ])
         if (newsRes.data.success) setNews(newsRes.data.data || [])
         if (calendarRes.data.success) setEvents(calendarRes.data.todayEvents || [])

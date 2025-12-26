@@ -26,11 +26,11 @@ const MobileIB = ({ onBack }) => {
     try {
       setLoading(true)
       const [profileRes, statsRes, referralsRes, commissionsRes, withdrawalsRes] = await Promise.all([
-        axios.get('/api/ib/profile', getAuthHeader()),
-        axios.get('/api/ib/stats', getAuthHeader()),
-        axios.get('/api/ib/referrals', getAuthHeader()),
-        axios.get('/api/ib/commissions', getAuthHeader()),
-        axios.get('/api/ib/withdrawals', getAuthHeader())
+        axios.get('/ib/profile', getAuthHeader()),
+        axios.get('/ib/stats', getAuthHeader()),
+        axios.get('/ib/referrals', getAuthHeader()),
+        axios.get('/ib/commissions', getAuthHeader()),
+        axios.get('/ib/withdrawals', getAuthHeader())
       ])
 
       if (profileRes.data.success) setProfile(profileRes.data.data)
@@ -61,7 +61,7 @@ const MobileIB = ({ onBack }) => {
     if (!withdrawAmount || parseFloat(withdrawAmount) <= 0) return
     try {
       setSubmitting(true)
-      const res = await axios.post('/api/ib/withdraw-to-wallet', { amount: parseFloat(withdrawAmount) }, getAuthHeader())
+      const res = await axios.post('/ib/withdraw-to-wallet', { amount: parseFloat(withdrawAmount) }, getAuthHeader())
       if (res.data.success) {
         alert(res.data.message)
         setWithdrawAmount('')

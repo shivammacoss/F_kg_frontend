@@ -61,7 +61,7 @@ const Support = () => {
   const fetchTickets = async () => {
     try {
       setLoading(true)
-      const res = await axios.get('/api/support/tickets', getAuthHeader())
+      const res = await axios.get('/support/tickets', getAuthHeader())
       if (res.data.success) {
         setTickets(res.data.data)
       }
@@ -89,7 +89,7 @@ const Support = () => {
 
     try {
       setSending(true)
-      const res = await axios.post('/api/support/tickets', newTicketForm, getAuthHeader())
+      const res = await axios.post('/support/tickets', newTicketForm, getAuthHeader())
       if (res.data.success) {
         setTickets([res.data.data, ...tickets])
         setSelectedTicket(res.data.data)

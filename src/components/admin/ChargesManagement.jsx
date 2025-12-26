@@ -55,9 +55,9 @@ const ChargesManagement = () => {
     try {
       setLoading(true)
       const [chargesRes, statsRes, symbolsRes] = await Promise.all([
-        axios.get('/api/admin/charges', getAuthHeader()),
-        axios.get('/api/admin/charges/stats', getAuthHeader()),
-        axios.get('/api/admin/charges/symbols', getAuthHeader())
+        axios.get('/admin/charges', getAuthHeader()),
+        axios.get('/admin/charges/stats', getAuthHeader()),
+        axios.get('/admin/charges/symbols', getAuthHeader())
       ])
       if (chargesRes.data.success) setCharges(chargesRes.data.data)
       if (statsRes.data.success) setStats(statsRes.data.data)
@@ -76,7 +76,7 @@ const ChargesManagement = () => {
       if (editingCharge) {
         await axios.put(`/api/admin/charges/${editingCharge._id}`, form, getAuthHeader())
       } else {
-        await axios.post('/api/admin/charges', form, getAuthHeader())
+        await axios.post('/admin/charges', form, getAuthHeader())
       }
       setShowAddModal(false)
       setEditingCharge(null)

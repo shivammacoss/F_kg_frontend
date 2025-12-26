@@ -52,7 +52,7 @@ const SupportManagement = () => {
     try {
       setLoading(true)
       const [statsRes, ticketsRes] = await Promise.all([
-        axios.get('/api/admin/support/stats', getAuthHeader()),
+        axios.get('/admin/support/stats', getAuthHeader()),
         axios.get(`/api/admin/support/tickets?status=${statusFilter}`, getAuthHeader())
       ])
       if (statsRes.data.success) setStats(statsRes.data.data)

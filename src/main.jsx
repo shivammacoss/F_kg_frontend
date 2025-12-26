@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import axios from 'axios'
 import App from './App.jsx'
 import { AdminPanel } from './components/admin'
 import { Login, Signup, AdminLogin } from './components/auth'
@@ -9,6 +10,9 @@ import { ThemeProvider } from './context/ThemeContext.jsx'
 import { SocketProvider } from './context/SocketContext.jsx'
 import { AuthProvider } from './context/AuthContext.jsx'
 import './index.css'
+
+// Configure axios defaults for API calls
+axios.defaults.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api'
 
 // Set initial theme class
 document.documentElement.classList.add('dark')

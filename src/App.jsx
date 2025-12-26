@@ -53,13 +53,13 @@ function App({ initialView = 'home' }) {
 
       try {
         // Get user balance
-        const userRes = await axios.get('/api/auth/me', {
+        const userRes = await axios.get('/auth/me', {
           headers: { Authorization: `Bearer ${token}` }
         })
         const balance = userRes.data.data?.balance || 0
 
         // Get open trades for margin calculation
-        const tradesRes = await axios.get('/api/trades', {
+        const tradesRes = await axios.get('/trades', {
           headers: { Authorization: `Bearer ${token}` }
         })
         const trades = tradesRes.data.data?.trades || tradesRes.data.data || []

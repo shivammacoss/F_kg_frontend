@@ -48,11 +48,11 @@ const CopyTradeManagement = () => {
     try {
       setLoading(true)
       const [reqRes, masterRes, followerRes, commRes, statsRes] = await Promise.all([
-        axios.get('/api/admin/copy-trade/requests', getAuthHeader()),
-        axios.get('/api/admin/copy-trade/masters', getAuthHeader()),
-        axios.get('/api/admin/copy-trade/followers', getAuthHeader()),
-        axios.get('/api/admin/copy-trade/commissions?limit=50', getAuthHeader()),
-        axios.get('/api/admin/copy-trade/stats', getAuthHeader())
+        axios.get('/admin/copy-trade/requests', getAuthHeader()),
+        axios.get('/admin/copy-trade/masters', getAuthHeader()),
+        axios.get('/admin/copy-trade/followers', getAuthHeader()),
+        axios.get('/admin/copy-trade/commissions?limit=50', getAuthHeader()),
+        axios.get('/admin/copy-trade/stats', getAuthHeader())
       ])
       if (reqRes.data.success) setRequests(reqRes.data.data)
       if (masterRes.data.success) setMasters(masterRes.data.data)

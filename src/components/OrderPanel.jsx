@@ -34,7 +34,7 @@ const OrderPanel = ({ symbol, orderType, setOrderType, onClose }) => {
       const token = localStorage.getItem('token')
       if (!token) return
       try {
-        const res = await axios.get('/api/auth/me', getAuthHeader())
+        const res = await axios.get('/auth/me', getAuthHeader())
         if (res.data.success) {
           setMarginFree(res.data.data.balance || 0)
         }
@@ -54,7 +54,7 @@ const OrderPanel = ({ symbol, orderType, setOrderType, onClose }) => {
         const token = localStorage.getItem('token')
         if (!token) return
         
-        const res = await axios.get('/api/trades/prices', getAuthHeader())
+        const res = await axios.get('/trades/prices', getAuthHeader())
         if (res.data.success) {
           setMockPrices(res.data.data)
         }
@@ -136,7 +136,7 @@ const OrderPanel = ({ symbol, orderType, setOrderType, onClose }) => {
         }
       }
 
-      const res = await axios.post('/api/trades', orderData, getAuthHeader())
+      const res = await axios.post('/trades', orderData, getAuthHeader())
       
       if (res.data.success) {
         // Reset form

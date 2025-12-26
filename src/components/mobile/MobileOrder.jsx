@@ -21,8 +21,8 @@ const MobileOrder = ({ symbol }) => {
       if (!token) return
       try {
         const [priceRes, userRes] = await Promise.all([
-          axios.get('/api/trades/prices', { headers: { Authorization: `Bearer ${token}` } }),
-          axios.get('/api/auth/me', { headers: { Authorization: `Bearer ${token}` } })
+          axios.get('/trades/prices', { headers: { Authorization: `Bearer ${token}` } }),
+          axios.get('/auth/me', { headers: { Authorization: `Bearer ${token}` } })
         ])
         if (priceRes.data.success && priceRes.data.data[symbol]) {
           setPrices(priceRes.data.data[symbol])
@@ -56,7 +56,7 @@ const MobileOrder = ({ symbol }) => {
         orderData.price = parseFloat(pendingPrice)
       }
       
-      const res = await axios.post('/api/trades', orderData, { 
+      const res = await axios.post('/trades', orderData, { 
         headers: { Authorization: `Bearer ${token}` } 
       })
       

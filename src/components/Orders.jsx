@@ -40,7 +40,7 @@ const Orders = () => {
   const fetchTrades = async () => {
     try {
       setLoading(true)
-      const res = await axios.get('/api/trades?limit=100', getAuthHeader())
+      const res = await axios.get('/trades?limit=100', getAuthHeader())
       if (res.data.success) {
         // Handle both response formats
         const tradesData = res.data.data?.trades || res.data.data || []

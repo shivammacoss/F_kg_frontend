@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Eye, EyeOff, Mail, Lock, Loader2 } from 'lucide-react'
-import axios from 'axios'
+import api from '../../services/api'
 
 const Login = ({ onLogin }) => {
   const navigate = useNavigate()
@@ -17,7 +17,7 @@ const Login = ({ onLogin }) => {
     setError('')
 
     try {
-      const res = await axios.post('/api/auth/login', formData)
+      const res = await api.post('/auth/login', formData)
       if (res.data.success) {
         localStorage.setItem('token', res.data.data.token)
         localStorage.setItem('user', JSON.stringify(res.data.data.user))

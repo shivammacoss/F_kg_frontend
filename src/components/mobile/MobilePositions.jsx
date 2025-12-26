@@ -31,7 +31,7 @@ const MobilePositions = () => {
       return
     }
     try {
-      const res = await axios.get('/api/trades?limit=50', {
+      const res = await axios.get('/trades?limit=50', {
         headers: { Authorization: `Bearer ${token}` }
       })
       if (res.data.success) {

@@ -20,7 +20,7 @@ const Header = ({ onTradeClick, showOrderPanel }) => {
     if (!token) return
 
     try {
-      const res = await axios.get('/api/auth/me', {
+      const res = await axios.get('/auth/me', {
         headers: { Authorization: `Bearer ${token}` }
       })
       if (res.data.success) {

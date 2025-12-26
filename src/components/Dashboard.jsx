@@ -89,7 +89,7 @@ const Dashboard = () => {
 
       try {
         // Fetch user profile
-        const profileRes = await axios.get('/api/auth/me', {
+        const profileRes = await axios.get('/auth/me', {
           headers: { Authorization: `Bearer ${token}` }
         })
         if (profileRes.data.success) {
@@ -103,7 +103,7 @@ const Dashboard = () => {
 
         // Fetch user trades for stats - use correct endpoint
         try {
-          const tradesRes = await axios.get('/api/trades', {
+          const tradesRes = await axios.get('/trades', {
             headers: { Authorization: `Bearer ${token}` }
           })
           if (tradesRes.data.success) {
@@ -218,7 +218,7 @@ const Dashboard = () => {
   const fetchMarketNews = async () => {
     setNewsLoading(true)
     try {
-      const response = await axios.get('/api/market/news?limit=50')
+      const response = await axios.get('/market/news?limit=50')
       if (response.data.success) {
         const newNews = response.data.data || []
         
@@ -254,7 +254,7 @@ const Dashboard = () => {
   const fetchEconomicCalendar = async () => {
     setCalendarLoading(true)
     try {
-      const response = await axios.get('/api/market/calendar?fullDay=true')
+      const response = await axios.get('/market/calendar?fullDay=true')
       if (response.data.success) {
         const events = response.data.todayEvents || response.data.data || []
         

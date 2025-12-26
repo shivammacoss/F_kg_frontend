@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { Eye, EyeOff, Mail, Lock, User, Loader2, UserPlus } from 'lucide-react'
-import axios from 'axios'
+import api from '../../services/api'
 
 const Signup = ({ onSignup }) => {
   const navigate = useNavigate()
@@ -37,7 +37,7 @@ const Signup = ({ onSignup }) => {
     setLoading(true)
 
     try {
-      const res = await axios.post('/api/auth/register', {
+      const res = await api.post('/auth/register', {
         firstName: formData.firstName,
         lastName: formData.lastName,
         email: formData.email,

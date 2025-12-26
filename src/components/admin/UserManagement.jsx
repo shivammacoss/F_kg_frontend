@@ -60,7 +60,7 @@ const UserManagement = () => {
   // Fetch stats
   const fetchStats = async () => {
     try {
-      const res = await axios.get('/api/admin/users/stats/summary', getAuthHeader())
+      const res = await axios.get('/admin/users/stats/summary', getAuthHeader())
       if (res.data.success) {
         setStats(res.data.data)
       }
@@ -79,7 +79,7 @@ const UserManagement = () => {
     e.preventDefault()
     setActionLoading(true)
     try {
-      const res = await axios.post('/api/admin/users', formData, getAuthHeader())
+      const res = await axios.post('/admin/users', formData, getAuthHeader())
       if (res.data.success) {
         setShowCreateModal(false)
         setFormData({ firstName: '', lastName: '', email: '', password: '', phone: '', country: '', balance: 0, isVerified: false })

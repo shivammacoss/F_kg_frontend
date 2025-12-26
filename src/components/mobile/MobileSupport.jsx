@@ -41,7 +41,7 @@ const MobileSupport = ({ onBack }) => {
   const fetchTickets = async () => {
     try {
       setLoading(true)
-      const res = await axios.get('/api/support/tickets', getAuthHeader())
+      const res = await axios.get('/support/tickets', getAuthHeader())
       if (res.data.success) setTickets(res.data.data || [])
     } catch (err) {
       console.error('Failed to fetch tickets:', err)
@@ -63,7 +63,7 @@ const MobileSupport = ({ onBack }) => {
     if (!newTicketForm.subject || !newTicketForm.message) return alert('Fill all fields')
     try {
       setSending(true)
-      const res = await axios.post('/api/support/tickets', newTicketForm, getAuthHeader())
+      const res = await axios.post('/support/tickets', newTicketForm, getAuthHeader())
       if (res.data.success) {
         setTickets([res.data.data, ...tickets])
         setSelectedTicket(res.data.data)

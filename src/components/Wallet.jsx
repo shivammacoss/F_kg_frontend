@@ -105,10 +105,10 @@ const Wallet = () => {
     try {
       setLoading(true)
       const [balanceRes, settingsRes, accountsRes, transRes] = await Promise.all([
-        axios.get('/api/wallet/balance', getAuthHeader()),
-        axios.get('/api/wallet/bank-settings', getAuthHeader()),
-        axios.get('/api/wallet/bank-accounts', getAuthHeader()),
-        axios.get('/api/wallet/transactions?limit=20', getAuthHeader())
+        axios.get('/wallet/balance', getAuthHeader()),
+        axios.get('/wallet/bank-settings', getAuthHeader()),
+        axios.get('/wallet/bank-accounts', getAuthHeader()),
+        axios.get('/wallet/transactions?limit=20', getAuthHeader())
       ])
 
       if (balanceRes.data.success) setBalance(balanceRes.data.data.balance)
@@ -148,7 +148,7 @@ const Wallet = () => {
 
     try {
       setSubmitting(true)
-      const res = await axios.post('/api/wallet/deposit', {
+      const res = await axios.post('/wallet/deposit', {
         amount: usdEquivalent, // Send USD equivalent
         originalAmount: parseFloat(depositAmount),
         originalCurrency: depositCurrency,
@@ -187,7 +187,7 @@ const Wallet = () => {
 
     try {
       setSubmitting(true)
-      const res = await axios.post('/api/wallet/withdraw', {
+      const res = await axios.post('/wallet/withdraw', {
         amount: parseFloat(withdrawAmount),
         withdrawalMethod,
         bankAccountId: selectedBankAccount || undefined
@@ -209,7 +209,7 @@ const Wallet = () => {
     e.preventDefault()
     try {
       setSubmitting(true)
-      const res = await axios.post('/api/wallet/bank-accounts', newBankAccount, getAuthHeader())
+      const res = await axios.post('/wallet/bank-accounts', newBankAccount, getAuthHeader())
       if (res.data.success) {
         setUserBankAccounts([...userBankAccounts, res.data.data])
         setShowAddBank(false)
@@ -225,7 +225,7 @@ const Wallet = () => {
   const handleDeleteBankAccount = async (id) => {
     if (!confirm('Delete this bank account?')) return
     try {
-      await axios.delete(`/api/wallet/bank-accounts/${id}`, getAuthHeader())
+      await axios.delete(`/wallet/bank-accounts/${id}`, getAuthHeader())
       setUserBankAccounts(userBankAccounts.filter(a => a._id !== id))
     } catch (err) {
       alert('Failed to delete bank account')

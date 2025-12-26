@@ -99,7 +99,7 @@ const PositionsTable = () => {
 
     try {
       setLoading(true)
-      const res = await axios.get('/api/trades', getAuthHeader())
+      const res = await axios.get('/trades', getAuthHeader())
       if (res.data.success) {
         const trades = res.data.data?.trades || res.data.data || []
         setPositions(trades.filter(t => t.status === 'open'))
@@ -116,7 +116,7 @@ const PositionsTable = () => {
 
   const fetchPrices = async () => {
     try {
-      const res = await axios.get('/api/trades/prices', getAuthHeader())
+      const res = await axios.get('/trades/prices', getAuthHeader())
       if (res.data.success) {
         setPrices(res.data.data)
       }
