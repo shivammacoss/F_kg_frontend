@@ -27,7 +27,7 @@ const PositionsTable = () => {
   })
 
   useEffect(() => {
-    fetchPositions()
+    fetchPositions(true)
     fetchPrices()
     
     // Set up socket for real-time price updates
@@ -90,7 +90,7 @@ const PositionsTable = () => {
     }
   }, [])
 
-  const fetchPositions = async () => {
+  const fetchPositions = async (showLoader = false) => {
     const token = localStorage.getItem('token')
     if (!token) {
       setLoading(false)
@@ -98,7 +98,7 @@ const PositionsTable = () => {
     }
 
     try {
-      setLoading(true)
+      if (showLoader) setLoading(true)
       const res = await axios.get('/trades', getAuthHeader())
       if (res.data.success) {
         const trades = res.data.data?.trades || res.data.data || []
@@ -110,7 +110,7 @@ const PositionsTable = () => {
       console.error('Failed to fetch positions:', err)
       setPositions([])
     } finally {
-      setLoading(false)
+      if (showLoader) setLoading(false)
     }
   }
 

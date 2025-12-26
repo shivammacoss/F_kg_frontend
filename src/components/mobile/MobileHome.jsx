@@ -26,7 +26,7 @@ const MobileHome = () => {
   })
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async (showLoader = false) => {
       const token = localStorage.getItem('token')
       if (!token) {
         setLoading(false)
@@ -34,6 +34,7 @@ const MobileHome = () => {
       }
       
       try {
+        if (showLoader) setLoading(true)
         // Fetch user profile
         const profileRes = await axios.get('/auth/me', getAuthHeader())
         let balance = 0
@@ -99,12 +100,12 @@ const MobileHome = () => {
       } catch (error) {
         console.error('Failed to fetch user data:', error)
       } finally {
-        setLoading(false)
+        if (showLoader) setLoading(false)
       }
     }
 
-    fetchData()
-    const interval = setInterval(fetchData, 5000)
+    fetchData(true)
+    const interval = setInterval(() => fetchData(false), 5000)
     return () => clearInterval(interval)
   }, [])
 

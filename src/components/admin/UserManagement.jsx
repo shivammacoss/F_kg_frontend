@@ -43,9 +43,9 @@ const UserManagement = () => {
   })
 
   // Fetch users
-  const fetchUsers = async () => {
+  const fetchUsers = async (showLoader = false) => {
     try {
-      setLoading(true)
+      if (showLoader) setLoading(true)
       const res = await axios.get(`/admin/users?search=${searchTerm}&status=${filterStatus}`, getAuthHeader())
       if (res.data.success) {
         setUsers(res.data.data.users)
@@ -53,7 +53,7 @@ const UserManagement = () => {
     } catch (err) {
       console.error('Error fetching users:', err)
     } finally {
-      setLoading(false)
+      if (showLoader) setLoading(false)
     }
   }
 
@@ -70,7 +70,7 @@ const UserManagement = () => {
   }
 
   useEffect(() => {
-    fetchUsers()
+    fetchUsers(true)
     fetchStats()
   }, [searchTerm, filterStatus])
 

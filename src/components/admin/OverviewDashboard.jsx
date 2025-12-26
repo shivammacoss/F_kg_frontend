@@ -33,13 +33,13 @@ const OverviewDashboard = () => {
   })
 
   useEffect(() => {
-    fetchDashboardData()
-    // Auto-refresh every 5 seconds
-    const interval = setInterval(fetchDashboardData, 5000)
+    fetchDashboardData(true)
+    // Auto-refresh every 10 seconds (silent)
+    const interval = setInterval(() => fetchDashboardData(false), 10000)
     return () => clearInterval(interval)
   }, [])
 
-  const fetchDashboardData = async () => {
+  const fetchDashboardData = async (showLoader = false) => {
     const token = localStorage.getItem('adminToken')
     if (!token) {
       console.error('[AdminDashboard] No admin token found')
@@ -48,6 +48,7 @@ const OverviewDashboard = () => {
     }
 
     try {
+      if (showLoader) setLoading(true)
       // Fetch dashboard stats
       const dashRes = await axios.get('/admin/dashboard', getAuthHeader())
       console.log('[AdminDashboard] Stats response:', dashRes.data)
@@ -87,7 +88,7 @@ const OverviewDashboard = () => {
     } catch (err) {
       console.error('[AdminDashboard] Error:', err.response?.data || err.message)
     } finally {
-      setLoading(false)
+      if (showLoader) setLoading(false)
     }
   }
 

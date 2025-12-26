@@ -61,12 +61,12 @@ const Profile = () => {
   })
 
   useEffect(() => {
-    fetchUserProfile()
+    fetchUserProfile(true)
   }, [])
 
-  const fetchUserProfile = async () => {
+  const fetchUserProfile = async (showLoader = false) => {
     try {
-      setLoading(true)
+      if (showLoader) setLoading(true)
       const res = await axios.get('/auth/me', getAuthHeader())
       if (res.data.success) {
         const userData = res.data.data
@@ -85,7 +85,7 @@ const Profile = () => {
     } catch (err) {
       console.error('Failed to fetch profile:', err)
     } finally {
-      setLoading(false)
+      if (showLoader) setLoading(false)
     }
   }
 

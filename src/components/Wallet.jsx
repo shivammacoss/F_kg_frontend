@@ -98,12 +98,12 @@ const Wallet = () => {
   })
 
   useEffect(() => {
-    fetchData()
+    fetchData(true)
   }, [])
 
-  const fetchData = async () => {
+  const fetchData = async (showLoader = false) => {
     try {
-      setLoading(true)
+      if (showLoader) setLoading(true)
       const [balanceRes, settingsRes, accountsRes, transRes] = await Promise.all([
         axios.get('/wallet/balance', getAuthHeader()),
         axios.get('/wallet/bank-settings', getAuthHeader()),
@@ -118,7 +118,7 @@ const Wallet = () => {
     } catch (err) {
       console.error('Failed to fetch wallet data:', err)
     } finally {
-      setLoading(false)
+      if (showLoader) setLoading(false)
     }
   }
 

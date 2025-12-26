@@ -28,7 +28,7 @@ const Navigation = () => {
             <img
               src="/F_kg.png"
               alt="Forex KG Logo"
-              className="h-[140px] w-auto object-contain"
+              className="h-[70px] w-auto object-contain"
             />
           </Link>
 

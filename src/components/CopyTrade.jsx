@@ -70,12 +70,12 @@ const CopyTrade = () => {
   })
 
   useEffect(() => {
-    fetchData()
+    fetchData(true)
   }, [sortBy, riskFilter])
 
-  const fetchData = async () => {
+  const fetchData = async (showLoader = false) => {
     try {
-      setLoading(true)
+      if (showLoader) setLoading(true)
       const [mastersRes, followsRes, statusRes] = await Promise.all([
         axios.get(`/copy-trade/masters?sort=${sortBy}${riskFilter !== 'all' ? `&riskLevel=${riskFilter}` : ''}`, getAuthHeader()),
         axios.get('/copy-trade/my-follows', getAuthHeader()),
@@ -88,7 +88,7 @@ const CopyTrade = () => {
     } catch (err) {
       console.error('Failed to fetch copy trade data:', err)
     } finally {
-      setLoading(false)
+      if (showLoader) setLoading(false)
     }
   }
 

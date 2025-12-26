@@ -47,7 +47,7 @@ const Support = () => {
   })
 
   useEffect(() => {
-    fetchTickets()
+    fetchTickets(true)
   }, [])
 
   useEffect(() => {
@@ -58,9 +58,9 @@ const Support = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }
 
-  const fetchTickets = async () => {
+  const fetchTickets = async (showLoader = false) => {
     try {
-      setLoading(true)
+      if (showLoader) setLoading(true)
       const res = await axios.get('/support/tickets', getAuthHeader())
       if (res.data.success) {
         setTickets(res.data.data)
@@ -68,7 +68,7 @@ const Support = () => {
     } catch (err) {
       console.error('Failed to fetch tickets:', err)
     } finally {
-      setLoading(false)
+      if (showLoader) setLoading(false)
     }
   }
 

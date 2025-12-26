@@ -31,15 +31,15 @@ const Orders = () => {
   })
 
   useEffect(() => {
-    fetchTrades()
-    // Auto-refresh every 3 seconds
-    const interval = setInterval(fetchTrades, 3000)
+    fetchTrades(true)
+    // Auto-refresh every 5 seconds (silent refresh)
+    const interval = setInterval(() => fetchTrades(false), 5000)
     return () => clearInterval(interval)
   }, [activeTab])
 
-  const fetchTrades = async () => {
+  const fetchTrades = async (showLoader = false) => {
     try {
-      setLoading(true)
+      if (showLoader) setLoading(true)
       const res = await axios.get('/trades?limit=100', getAuthHeader())
       if (res.data.success) {
         // Handle both response formats
@@ -49,7 +49,7 @@ const Orders = () => {
     } catch (err) {
       console.error('Failed to fetch trades:', err)
     } finally {
-      setLoading(false)
+      if (showLoader) setLoading(false)
     }
   }
 
@@ -138,7 +138,7 @@ const Orders = () => {
           <h1 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>Orders & History</h1>
           <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Manage your trades and download statements</p>
         </div>
-        <button onClick={fetchTrades} className="p-2 rounded-xl" style={{ backgroundColor: 'var(--bg-card)' }}>
+        <button onClick={() => fetchTrades(true)} className="p-2 rounded-xl" style={{ backgroundColor: 'var(--bg-card)' }}>
           <RefreshCw size={20} style={{ color: 'var(--text-secondary)' }} />
         </button>
       </div>

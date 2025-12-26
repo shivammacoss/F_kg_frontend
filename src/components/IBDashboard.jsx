@@ -35,12 +35,12 @@ const IBDashboard = () => {
   })
 
   useEffect(() => {
-    fetchData()
+    fetchData(true)
   }, [])
 
-  const fetchData = async () => {
+  const fetchData = async (showLoader = false) => {
     try {
-      setLoading(true)
+      if (showLoader) setLoading(true)
       const [profileRes, statsRes, referralsRes, commissionsRes, withdrawalsRes] = await Promise.all([
         axios.get('/ib/profile', getAuthHeader()),
         axios.get('/ib/stats', getAuthHeader()),
@@ -57,7 +57,7 @@ const IBDashboard = () => {
     } catch (err) {
       console.error('Failed to fetch IB data:', err)
     } finally {
-      setLoading(false)
+      if (showLoader) setLoading(false)
     }
   }
 

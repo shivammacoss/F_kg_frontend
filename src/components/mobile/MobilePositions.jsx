@@ -8,12 +8,12 @@ const MobilePositions = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetchTrades()
-    // Auto-refresh every 2 seconds
-    const interval = setInterval(fetchTrades, 2000)
+    fetchTrades(true)
+    // Auto-refresh every 3 seconds (silent)
+    const interval = setInterval(() => fetchTrades(false), 3000)
     
     // Listen for trade events
-    const handleTradeEvent = () => fetchTrades()
+    const handleTradeEvent = () => fetchTrades(false)
     window.addEventListener('tradeCreated', handleTradeEvent)
     window.addEventListener('tradeClosed', handleTradeEvent)
     
@@ -24,13 +24,14 @@ const MobilePositions = () => {
     }
   }, [])
 
-  const fetchTrades = async () => {
+  const fetchTrades = async (showLoader = false) => {
     const token = localStorage.getItem('token')
     if (!token) {
       setLoading(false)
       return
     }
     try {
+      if (showLoader) setLoading(true)
       const res = await axios.get('/trades?limit=50', {
         headers: { Authorization: `Bearer ${token}` }
       })
@@ -42,7 +43,7 @@ const MobilePositions = () => {
     } catch (err) {
       console.error('Failed to fetch trades:', err)
     } finally {
-      setLoading(false)
+      if (showLoader) setLoading(false)
     }
   }
 
