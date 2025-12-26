@@ -74,7 +74,7 @@ const Support = () => {
 
   const fetchTicketDetails = async (ticketId) => {
     try {
-      const res = await axios.get(`/api/support/tickets/${ticketId}`, getAuthHeader())
+      const res = await axios.get(`/support/tickets/${ticketId}`, getAuthHeader())
       if (res.data.success) {
         setSelectedTicket(res.data.data)
       }
@@ -109,7 +109,7 @@ const Support = () => {
 
     try {
       setSending(true)
-      const res = await axios.post(`/api/support/tickets/${selectedTicket._id}/message`, {
+      const res = await axios.post(`/support/tickets/${selectedTicket._id}/message`, {
         message: newMessage
       }, getAuthHeader())
       

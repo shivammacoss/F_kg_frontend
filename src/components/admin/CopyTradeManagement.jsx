@@ -70,7 +70,7 @@ const CopyTradeManagement = () => {
     if (!confirm('Approve this trade master request?')) return
     try {
       setActionLoading(request._id)
-      await axios.put(`/api/admin/copy-trade/requests/${request._id}/approve`, {}, getAuthHeader())
+      await axios.put(`/admin/copy-trade/requests/${request._id}/approve`, {}, getAuthHeader())
       alert('Request approved!')
       fetchData()
     } catch (err) {
@@ -84,7 +84,7 @@ const CopyTradeManagement = () => {
     if (!selectedItem) return
     try {
       setActionLoading(selectedItem._id)
-      await axios.put(`/api/admin/copy-trade/requests/${selectedItem._id}/reject`, { rejectionReason: rejectReason }, getAuthHeader())
+      await axios.put(`/admin/copy-trade/requests/${selectedItem._id}/reject`, { rejectionReason: rejectReason }, getAuthHeader())
       setShowRejectModal(false)
       setRejectReason('')
       setSelectedItem(null)
@@ -101,7 +101,7 @@ const CopyTradeManagement = () => {
     if (!confirm(`${action} this trade master?`)) return
     try {
       setActionLoading(master._id)
-      await axios.put(`/api/admin/copy-trade/masters/${master._id}/suspend`, {}, getAuthHeader())
+      await axios.put(`/admin/copy-trade/masters/${master._id}/suspend`, {}, getAuthHeader())
       fetchData()
     } catch (err) {
       alert(err.response?.data?.message || 'Failed to update')

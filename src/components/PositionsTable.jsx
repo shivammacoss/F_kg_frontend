@@ -128,7 +128,7 @@ const PositionsTable = () => {
   const closeTrade = async (tradeId) => {
     try {
       setClosingTrade(tradeId)
-      const res = await axios.put(`/api/trades/${tradeId}/close`, {}, getAuthHeader())
+      const res = await axios.put(`/trades/${tradeId}/close`, {}, getAuthHeader())
       if (res.data.success) {
         fetchPositions()
       }
@@ -142,7 +142,7 @@ const PositionsTable = () => {
   const cancelOrder = async (tradeId) => {
     try {
       setClosingTrade(tradeId)
-      const res = await axios.put(`/api/trades/${tradeId}/cancel`, {}, getAuthHeader())
+      const res = await axios.put(`/trades/${tradeId}/cancel`, {}, getAuthHeader())
       if (res.data.success) {
         fetchPositions()
       }
@@ -155,7 +155,7 @@ const PositionsTable = () => {
 
   const modifyTrade = async (tradeId) => {
     try {
-      const res = await axios.put(`/api/trades/${tradeId}/modify`, {
+      const res = await axios.put(`/trades/${tradeId}/modify`, {
         stopLoss: modifyForm.stopLoss ? parseFloat(modifyForm.stopLoss) : null,
         takeProfit: modifyForm.takeProfit ? parseFloat(modifyForm.takeProfit) : null
       }, getAuthHeader())

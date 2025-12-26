@@ -75,7 +75,7 @@ const IBManagement = () => {
     if (!confirm(`${action} this IB?`)) return
     try {
       setActionLoading(ib._id)
-      await axios.put(`/api/admin/ib/${ib._id}/suspend`, {}, getAuthHeader())
+      await axios.put(`/admin/ib/${ib._id}/suspend`, {}, getAuthHeader())
       fetchData()
     } catch (err) {
       alert(err.response?.data?.message || 'Failed to update')
@@ -88,7 +88,7 @@ const IBManagement = () => {
     if (!confirm('Approve this withdrawal?')) return
     try {
       setActionLoading(withdrawal._id)
-      await axios.put(`/api/admin/ib/withdrawals/${withdrawal._id}/approve`, {}, getAuthHeader())
+      await axios.put(`/admin/ib/withdrawals/${withdrawal._id}/approve`, {}, getAuthHeader())
       fetchData()
     } catch (err) {
       alert(err.response?.data?.message || 'Failed to approve')
@@ -102,7 +102,7 @@ const IBManagement = () => {
     if (!reason) return
     try {
       setActionLoading(withdrawal._id)
-      await axios.put(`/api/admin/ib/withdrawals/${withdrawal._id}/reject`, { reason }, getAuthHeader())
+      await axios.put(`/admin/ib/withdrawals/${withdrawal._id}/reject`, { reason }, getAuthHeader())
       fetchData()
     } catch (err) {
       alert(err.response?.data?.message || 'Failed to reject')
@@ -128,7 +128,7 @@ const IBManagement = () => {
     if (!selectedIB) return
     try {
       setActionLoading(selectedIB._id)
-      await axios.put(`/api/admin/ib/${selectedIB._id}`, {
+      await axios.put(`/admin/ib/${selectedIB._id}`, {
         commissionType: editForm.commissionType,
         commissionValue: editForm.commissionValue,
         firstDepositCommission: {

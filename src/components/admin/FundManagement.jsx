@@ -57,8 +57,8 @@ const FundManagement = () => {
     try {
       setActionLoading(tx._id)
       const endpoint = tx.type === 'deposit' 
-        ? `/api/admin/wallet/deposits/${tx._id}/approve`
-        : `/api/admin/wallet/withdrawals/${tx._id}/approve`
+        ? `/admin/wallet/deposits/${tx._id}/approve`
+        : `/admin/wallet/withdrawals/${tx._id}/approve`
       const res = await axios.put(endpoint, {}, getAuthHeader())
       if (res.data.success) {
         alert(`${tx.type} approved successfully!`)
@@ -76,8 +76,8 @@ const FundManagement = () => {
     try {
       setActionLoading(selectedTx._id)
       const endpoint = selectedTx.type === 'deposit'
-        ? `/api/admin/wallet/deposits/${selectedTx._id}/reject`
-        : `/api/admin/wallet/withdrawals/${selectedTx._id}/reject`
+        ? `/admin/wallet/deposits/${selectedTx._id}/reject`
+        : `/admin/wallet/withdrawals/${selectedTx._id}/reject`
       const res = await axios.put(endpoint, { rejectionReason: rejectReason }, getAuthHeader())
       if (res.data.success) {
         alert(`${selectedTx.type} rejected`)

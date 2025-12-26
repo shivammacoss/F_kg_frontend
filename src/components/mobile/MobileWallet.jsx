@@ -157,7 +157,7 @@ const MobileWallet = () => {
   const handleDeleteBankAccount = async (id) => {
     if (!confirm('Delete this account?')) return
     try {
-      await axios.delete(`/api/wallet/bank-accounts/${id}`, getAuthHeader())
+      await axios.delete(`/wallet/bank-accounts/${id}`, getAuthHeader())
       setUserBankAccounts(userBankAccounts.filter(a => a._id !== id))
     } catch (err) {
       alert('Failed to delete')

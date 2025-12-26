@@ -50,7 +50,7 @@ const MobileCopyTrade = ({ onBack }) => {
     try {
       setLoading(true)
       const [mastersRes, followsRes, statusRes] = await Promise.all([
-        axios.get(`/api/copy-trade/masters?sort=${sortBy}${riskFilter !== 'all' ? `&riskLevel=${riskFilter}` : ''}`, getAuthHeader()),
+        axios.get(`/copy-trade/masters?sort=${sortBy}${riskFilter !== 'all' ? `&riskLevel=${riskFilter}` : ''}`, getAuthHeader()),
         axios.get('/copy-trade/my-follows', getAuthHeader()),
         axios.get('/copy-trade/my-master-status', getAuthHeader())
       ])
@@ -83,7 +83,7 @@ const MobileCopyTrade = ({ onBack }) => {
     if (!selectedMaster) return
     try {
       setSubmitting(true)
-      const res = await axios.post(`/api/copy-trade/follow/${selectedMaster._id}`, followForm, getAuthHeader())
+      const res = await axios.post(`/copy-trade/follow/${selectedMaster._id}`, followForm, getAuthHeader())
       if (res.data.success) {
         alert('Successfully started following!')
         setShowFollowModal(false)
@@ -100,7 +100,7 @@ const MobileCopyTrade = ({ onBack }) => {
   const handleUnfollow = async (followId) => {
     if (!confirm('Stop copying this master?')) return
     try {
-      await axios.delete(`/api/copy-trade/unfollow/${followId}`, getAuthHeader())
+      await axios.delete(`/copy-trade/unfollow/${followId}`, getAuthHeader())
       fetchData()
     } catch (err) {
       alert(err.response?.data?.message || 'Failed to unfollow')
@@ -110,7 +110,7 @@ const MobileCopyTrade = ({ onBack }) => {
   const handleTogglePause = async (followId, currentStatus) => {
     try {
       const action = currentStatus === 'active' ? 'pause' : 'resume'
-      await axios.put(`/api/copy-trade/follow/${followId}/${action}`, {}, getAuthHeader())
+      await axios.put(`/copy-trade/follow/${followId}/${action}`, {}, getAuthHeader())
       fetchData()
     } catch (err) {
       alert(err.response?.data?.message || 'Failed to update')

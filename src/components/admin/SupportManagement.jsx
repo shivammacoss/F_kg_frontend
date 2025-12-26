@@ -53,7 +53,7 @@ const SupportManagement = () => {
       setLoading(true)
       const [statsRes, ticketsRes] = await Promise.all([
         axios.get('/admin/support/stats', getAuthHeader()),
-        axios.get(`/api/admin/support/tickets?status=${statusFilter}`, getAuthHeader())
+        axios.get(`/admin/support/tickets?status=${statusFilter}`, getAuthHeader())
       ])
       if (statsRes.data.success) setStats(statsRes.data.data)
       if (ticketsRes.data.success) setTickets(ticketsRes.data.data)
@@ -66,7 +66,7 @@ const SupportManagement = () => {
 
   const fetchTicketDetails = async (ticketId) => {
     try {
-      const res = await axios.get(`/api/admin/support/tickets/${ticketId}`, getAuthHeader())
+      const res = await axios.get(`/admin/support/tickets/${ticketId}`, getAuthHeader())
       if (res.data.success) {
         setSelectedTicket(res.data.data)
       }
@@ -81,7 +81,7 @@ const SupportManagement = () => {
 
     try {
       setSending(true)
-      const res = await axios.post(`/api/admin/support/tickets/${selectedTicket._id}/reply`, {
+      const res = await axios.post(`/admin/support/tickets/${selectedTicket._id}/reply`, {
         message: newMessage
       }, getAuthHeader())
       
@@ -99,7 +99,7 @@ const SupportManagement = () => {
 
   const handleUpdateStatus = async (ticketId, status) => {
     try {
-      const res = await axios.put(`/api/admin/support/tickets/${ticketId}/status`, { status }, getAuthHeader())
+      const res = await axios.put(`/admin/support/tickets/${ticketId}/status`, { status }, getAuthHeader())
       if (res.data.success) {
         setSelectedTicket(res.data.data)
         fetchData()
@@ -111,7 +111,7 @@ const SupportManagement = () => {
 
   const handleUpdatePriority = async (ticketId, priority) => {
     try {
-      const res = await axios.put(`/api/admin/support/tickets/${ticketId}/priority`, { priority }, getAuthHeader())
+      const res = await axios.put(`/admin/support/tickets/${ticketId}/priority`, { priority }, getAuthHeader())
       if (res.data.success) {
         setSelectedTicket(res.data.data)
         fetchData()

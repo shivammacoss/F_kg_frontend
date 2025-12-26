@@ -46,7 +46,7 @@ const UserManagement = () => {
   const fetchUsers = async () => {
     try {
       setLoading(true)
-      const res = await axios.get(`/api/admin/users?search=${searchTerm}&status=${filterStatus}`, getAuthHeader())
+      const res = await axios.get(`/admin/users?search=${searchTerm}&status=${filterStatus}`, getAuthHeader())
       if (res.data.success) {
         setUsers(res.data.data.users)
       }
@@ -98,7 +98,7 @@ const UserManagement = () => {
     e.preventDefault()
     setActionLoading(true)
     try {
-      const res = await axios.put(`/api/admin/users/${selectedUser._id}`, formData, getAuthHeader())
+      const res = await axios.put(`/admin/users/${selectedUser._id}`, formData, getAuthHeader())
       if (res.data.success) {
         setShowEditModal(false)
         setSelectedUser(null)
@@ -116,7 +116,7 @@ const UserManagement = () => {
     e.preventDefault()
     setActionLoading(true)
     try {
-      const res = await axios.put(`/api/admin/users/${selectedUser._id}/password`, { newPassword }, getAuthHeader())
+      const res = await axios.put(`/admin/users/${selectedUser._id}/password`, { newPassword }, getAuthHeader())
       if (res.data.success) {
         setShowPasswordModal(false)
         setSelectedUser(null)
@@ -134,7 +134,7 @@ const UserManagement = () => {
   const handleToggleBan = async (user) => {
     if (!confirm(`Are you sure you want to ${user.isActive ? 'ban' : 'unban'} this user?`)) return
     try {
-      const res = await axios.put(`/api/admin/users/${user._id}/ban`, {}, getAuthHeader())
+      const res = await axios.put(`/admin/users/${user._id}/ban`, {}, getAuthHeader())
       if (res.data.success) {
         fetchUsers()
         fetchStats()
@@ -148,7 +148,7 @@ const UserManagement = () => {
   const handleDeleteUser = async (user) => {
     if (!confirm('Are you sure you want to delete this user? This action cannot be undone.')) return
     try {
-      const res = await axios.delete(`/api/admin/users/${user._id}`, getAuthHeader())
+      const res = await axios.delete(`/admin/users/${user._id}`, getAuthHeader())
       if (res.data.success) {
         fetchUsers()
         fetchStats()

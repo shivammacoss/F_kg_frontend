@@ -50,7 +50,7 @@ const MobilePositions = () => {
     const token = localStorage.getItem('token')
     if (!confirm('Close this trade?')) return
     try {
-      const res = await axios.put(`/api/trades/${tradeId}/close`, {}, {
+      const res = await axios.put(`/trades/${tradeId}/close`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       })
       if (res.data.success) {

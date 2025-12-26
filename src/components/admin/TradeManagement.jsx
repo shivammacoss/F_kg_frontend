@@ -155,7 +155,7 @@ const TradeManagement = () => {
       if (modifyForm.notes !== selectedTrade.notes) 
         updateData.notes = modifyForm.notes
       
-      const res = await axios.put(`/api/admin/trades/${selectedTrade._id}/modify`, updateData, getAuthHeader())
+      const res = await axios.put(`/admin/trades/${selectedTrade._id}/modify`, updateData, getAuthHeader())
       if (res.data.success) {
         alert('Trade modified successfully!')
         setShowModifyModal(false)
@@ -173,7 +173,7 @@ const TradeManagement = () => {
     if (!selectedTrade) return
     try {
       setActionLoading('close')
-      const res = await axios.put(`/api/admin/trades/${selectedTrade._id}/close`, {}, getAuthHeader())
+      const res = await axios.put(`/admin/trades/${selectedTrade._id}/close`, {}, getAuthHeader())
       if (res.data.success) {
         alert(`Trade closed! P/L: $${res.data.data?.profit?.toFixed(2) || 0}`)
         setShowCloseModal(false)

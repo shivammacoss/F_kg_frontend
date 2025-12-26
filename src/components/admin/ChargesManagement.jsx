@@ -74,7 +74,7 @@ const ChargesManagement = () => {
     try {
       setSubmitting(true)
       if (editingCharge) {
-        await axios.put(`/api/admin/charges/${editingCharge._id}`, form, getAuthHeader())
+        await axios.put(`/admin/charges/${editingCharge._id}`, form, getAuthHeader())
       } else {
         await axios.post('/admin/charges', form, getAuthHeader())
       }
@@ -92,7 +92,7 @@ const ChargesManagement = () => {
   const handleDelete = async (id) => {
     if (!confirm('Are you sure you want to delete this charge setting?')) return
     try {
-      await axios.delete(`/api/admin/charges/${id}`, getAuthHeader())
+      await axios.delete(`/admin/charges/${id}`, getAuthHeader())
       fetchData()
     } catch (err) {
       alert('Failed to delete charge')
