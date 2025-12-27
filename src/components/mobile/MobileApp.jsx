@@ -25,9 +25,9 @@ const MobileApp = () => {
   const renderContent = () => {
     switch (activeTab) {
       case 'home':
-        return <MobileHome />
+        return <MobileHome onNavigate={setActiveTab} />
       case 'trade':
-        return <MobileTrade onBack={() => setActiveTab('home')} />
+        return <MobileTrade onBack={() => setActiveTab('home')} onNavigate={setActiveTab} />
       case 'wallet':
         return <MobileWallet />
       case 'ib':
@@ -44,7 +44,7 @@ const MobileApp = () => {
   }
 
   return (
-    <div className="w-screen flex flex-col" style={{ backgroundColor: '#000000', height: '100dvh', minHeight: '-webkit-fill-available' }}>
+    <div className="w-screen flex flex-col" style={{ backgroundColor: 'var(--bg-primary)', height: '100dvh', minHeight: '-webkit-fill-available' }}>
       {/* Main Content */}
       <div className="flex-1 overflow-hidden">
         {renderContent()}
@@ -55,8 +55,8 @@ const MobileApp = () => {
         <nav 
           className="flex items-center justify-around py-2"
           style={{ 
-            backgroundColor: '#0d0d0d',
-            borderTop: '1px solid #1a1a1a'
+            backgroundColor: 'var(--bg-secondary)',
+            borderTop: '1px solid var(--border-color)'
           }}
         >
           {tabs.map((tab) => (

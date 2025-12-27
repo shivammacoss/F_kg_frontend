@@ -6,7 +6,7 @@ import MobileChart from './MobileChart'
 import MobileOrder from './MobileOrder'
 import MobilePositions from './MobilePositions'
 
-const MobileTrade = ({ onBack }) => {
+const MobileTrade = ({ onBack, onNavigate }) => {
   const [activeTab, setActiveTab] = useState('chart')
   const [selectedSymbol, setSelectedSymbol] = useState(() => {
     return localStorage.getItem('selectedSymbol') || 'XAUUSD'
@@ -64,22 +64,22 @@ const MobileTrade = ({ onBack }) => {
   }
 
   return (
-    <div className="h-full flex flex-col" style={{ backgroundColor: '#000000' }}>
+    <div className="h-full flex flex-col" style={{ backgroundColor: 'var(--bg-primary)' }}>
       {/* Top Header */}
       <div 
         className="flex items-center justify-between px-4 py-3"
-        style={{ backgroundColor: '#0d0d0d', borderBottom: '1px solid #1a1a1a' }}
+        style={{ backgroundColor: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-color)' }}
       >
-        <button onClick={onBack} className="p-2 rounded-lg" style={{ backgroundColor: '#1a1a1a' }}>
+        <button onClick={onBack} className="p-2 rounded-lg" style={{ backgroundColor: 'var(--bg-hover)' }}>
           <Home size={18} color="#9ca3af" />
         </button>
         
         <div className="text-center">
-          <p className="text-xs" style={{ color: '#6b7280' }}>Equity</p>
-          <p className="text-base font-bold" style={{ color: '#fff' }}>${equity.toFixed(2)}</p>
+          <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Equity</p>
+          <p className="text-base font-bold" style={{ color: 'var(--text-primary)' }}>${equity.toFixed(2)}</p>
         </div>
         
-        <button className="p-2 rounded-lg" style={{ backgroundColor: '#1a1a1a' }}>
+        <button onClick={() => onNavigate?.('wallet')} className="p-2 rounded-lg" style={{ backgroundColor: 'var(--bg-hover)' }}>
           <Wallet size={18} color="#22c55e" />
         </button>
       </div>
@@ -92,7 +92,7 @@ const MobileTrade = ({ onBack }) => {
       {/* Bottom Trade Navigation */}
       <nav 
         className="flex items-center justify-around py-2"
-        style={{ backgroundColor: '#0d0d0d', borderTop: '1px solid #1a1a1a' }}
+        style={{ backgroundColor: 'var(--bg-secondary)', borderTop: '1px solid var(--border-color)' }}
       >
         {tabs.map((tab) => (
           <button

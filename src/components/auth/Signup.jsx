@@ -59,7 +59,7 @@ const Signup = ({ onSignup }) => {
   }
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex overflow-x-hidden">
       {/* Left Side - Branding */}
       <div className="hidden lg:flex lg:w-1/2 flex-col p-8" style={{ backgroundColor: '#0a0a0f' }}>
         {/* Top Header with Logo and Back Button */}
@@ -153,13 +153,13 @@ const Signup = ({ onSignup }) => {
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
               <input
                 type="text"
                 placeholder="First Name"
                 value={formData.firstName}
                 onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                className="flex-1 px-4 py-4 rounded-xl bg-transparent border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 transition-colors"
+                className="w-full sm:flex-1 px-4 py-4 rounded-xl bg-transparent border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 transition-colors"
                 required
               />
               <input
@@ -167,7 +167,7 @@ const Signup = ({ onSignup }) => {
                 placeholder="Last Name"
                 value={formData.lastName}
                 onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                className="flex-1 px-4 py-4 rounded-xl bg-transparent border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 transition-colors"
+                className="w-full sm:flex-1 px-4 py-4 rounded-xl bg-transparent border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 transition-colors"
                 required
               />
             </div>

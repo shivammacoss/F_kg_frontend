@@ -46,7 +46,7 @@ const MobileMarkets = ({ onSelect, selectedSymbol }) => {
   })
 
   return (
-    <div className="h-full flex flex-col" style={{ backgroundColor: '#000000' }}>
+    <div className="h-full flex flex-col" style={{ backgroundColor: 'var(--bg-primary)' }}>
       {/* Search */}
       <div className="p-3">
         <div className="relative">
@@ -57,7 +57,7 @@ const MobileMarkets = ({ onSelect, selectedSymbol }) => {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full pl-9 pr-3 py-2 rounded-lg text-sm"
-            style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a', color: '#fff' }}
+            style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)', color: 'var(--text-primary)' }}
           />
         </div>
       </div>
@@ -70,7 +70,7 @@ const MobileMarkets = ({ onSelect, selectedSymbol }) => {
             onClick={() => setActiveFilter(f)}
             className="px-3 py-1 rounded-lg text-xs capitalize"
             style={{ 
-              backgroundColor: activeFilter === f ? '#22c55e' : '#0d0d0d',
+              backgroundColor: activeFilter === f ? '#22c55e' : 'var(--bg-secondary)',
               color: activeFilter === f ? '#000' : '#9ca3af'
             }}
           >
@@ -89,14 +89,14 @@ const MobileMarkets = ({ onSelect, selectedSymbol }) => {
               onClick={() => onSelect(inst.symbol)}
               className="w-full flex items-center justify-between px-4 py-3"
               style={{ 
-                backgroundColor: selectedSymbol === inst.symbol ? '#0d0d0d' : 'transparent',
-                borderBottom: '1px solid #1a1a1a'
+                backgroundColor: selectedSymbol === inst.symbol ? 'var(--bg-secondary)' : 'transparent',
+                borderBottom: '1px solid var(--border-color)'
               }}
             >
               <div className="flex items-center gap-3">
                 <Star size={14} color={selectedSymbol === inst.symbol ? '#fbbf24' : '#374151'} />
                 <div className="text-left">
-                  <p className="text-sm font-medium" style={{ color: '#fff' }}>{inst.symbol}</p>
+                  <p className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{inst.symbol}</p>
                   <p className="text-xs" style={{ color: '#22c55e' }}>+0.00%</p>
                 </div>
               </div>

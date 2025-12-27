@@ -3,6 +3,63 @@ import React, { useEffect, useRef } from 'react'
 const MobileChart = ({ symbol }) => {
   const containerRef = useRef(null)
 
+  // Map symbols to TradingView format
+  const getSymbol = (sym) => {
+    const symbolMap = {
+      // Major Forex
+      'EURUSD': 'FX:EURUSD',
+      'GBPUSD': 'FX:GBPUSD',
+      'USDJPY': 'FX:USDJPY',
+      'USDCHF': 'FX:USDCHF',
+      'AUDUSD': 'FX:AUDUSD',
+      'NZDUSD': 'FX:NZDUSD',
+      'USDCAD': 'FX:USDCAD',
+      // Cross pairs
+      'EURGBP': 'FX:EURGBP',
+      'EURJPY': 'FX:EURJPY',
+      'EURCHF': 'FX:EURCHF',
+      'GBPJPY': 'FX:GBPJPY',
+      'AUDCAD': 'FX:AUDCAD',
+      'AUDCHF': 'FX:AUDCHF',
+      'AUDJPY': 'FX:AUDJPY',
+      'AUDNZD': 'FX:AUDNZD',
+      'CADCHF': 'FX:CADCHF',
+      'CADJPY': 'FX:CADJPY',
+      'CHFJPY': 'FX:CHFJPY',
+      'EURAUD': 'FX:EURAUD',
+      'EURCAD': 'FX:EURCAD',
+      'EURNZD': 'FX:EURNZD',
+      'GBPAUD': 'FX:GBPAUD',
+      'GBPCAD': 'FX:GBPCAD',
+      'GBPCHF': 'FX:GBPCHF',
+      'GBPNZD': 'FX:GBPNZD',
+      'NZDCAD': 'FX:NZDCAD',
+      'NZDCHF': 'FX:NZDCHF',
+      'NZDJPY': 'FX:NZDJPY',
+      // Metals
+      'XAUUSD': 'TVC:GOLD',
+      'XAGUSD': 'TVC:SILVER',
+      'XAUEUR': 'TVC:GOLDEUR',
+      // Indices
+      'US30': 'TVC:DJI',
+      'US500': 'TVC:SPX',
+      'US100': 'NASDAQ:NDX',
+      'DE30': 'XETR:DAX',
+      'UK100': 'TVC:UKX',
+      'JP225': 'TVC:NI225',
+      // Crypto
+      'BTCUSD': 'BINANCE:BTCUSDT',
+      'ETHUSD': 'BINANCE:ETHUSDT',
+      'LTCUSD': 'BINANCE:LTCUSDT',
+      'XRPUSD': 'BINANCE:XRPUSDT',
+      // Energy
+      'USOIL': 'TVC:USOIL',
+      'UKOIL': 'TVC:UKOIL',
+      'XNGUSD': 'TVC:NATURALGAS',
+    }
+    return symbolMap[sym] || `FX:${sym}`
+  }
+
   useEffect(() => {
     if (!containerRef.current) return
 
@@ -13,7 +70,7 @@ const MobileChart = ({ symbol }) => {
       if (window.TradingView) {
         new window.TradingView.widget({
           autosize: true,
-          symbol: symbol.includes('USD') ? `FX:${symbol}` : symbol,
+          symbol: getSymbol(symbol),
           interval: '15',
           timezone: 'Etc/UTC',
           theme: 'dark',
@@ -40,10 +97,10 @@ const MobileChart = ({ symbol }) => {
   }, [symbol])
 
   return (
-    <div className="h-full flex flex-col" style={{ backgroundColor: '#000000' }}>
+    <div className="h-full flex flex-col" style={{ backgroundColor: 'var(--bg-primary)' }}>
       {/* Symbol Header */}
-      <div className="px-3 py-2 flex items-center gap-2" style={{ borderBottom: '1px solid #1a1a1a' }}>
-        <span className="text-sm font-medium" style={{ color: '#fff' }}>{symbol}</span>
+      <div className="px-3 py-2 flex items-center gap-2" style={{ borderBottom: '1px solid var(--border-color)' }}>
+        <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{symbol}</span>
         <span className="text-xs" style={{ color: '#22c55e' }}>+0.00%</span>
       </div>
 

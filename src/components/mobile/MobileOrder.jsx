@@ -83,14 +83,14 @@ const MobileOrder = ({ symbol }) => {
   const executionPrice = tradeType === 'buy' ? prices.ask : prices.bid
 
   return (
-    <div className="h-full overflow-y-auto p-4" style={{ backgroundColor: '#000000' }}>
+    <div className="h-full overflow-y-auto p-4" style={{ backgroundColor: 'var(--bg-primary)' }}>
       {/* Order Type Tabs */}
-      <div className="flex mb-4 rounded-lg overflow-hidden" style={{ backgroundColor: '#0d0d0d' }}>
+      <div className="flex mb-4 rounded-lg overflow-hidden" style={{ backgroundColor: 'var(--bg-secondary)' }}>
         <button
           onClick={() => setOrderType('market')}
           className="flex-1 py-2 text-sm font-medium"
           style={{ 
-            backgroundColor: orderType === 'market' ? '#1a1a1a' : 'transparent',
+            backgroundColor: orderType === 'market' ? 'var(--bg-hover)' : 'transparent',
             color: orderType === 'market' ? '#fff' : '#6b7280'
           }}
         >
@@ -100,7 +100,7 @@ const MobileOrder = ({ symbol }) => {
           onClick={() => setOrderType('pending')}
           className="flex-1 py-2 text-sm font-medium"
           style={{ 
-            backgroundColor: orderType === 'pending' ? '#1a1a1a' : 'transparent',
+            backgroundColor: orderType === 'pending' ? 'var(--bg-hover)' : 'transparent',
             color: orderType === 'pending' ? '#fff' : '#6b7280'
           }}
         >
@@ -141,24 +141,24 @@ const MobileOrder = ({ symbol }) => {
       {/* Pending Price (only for pending orders) */}
       {orderType === 'pending' && (
         <div className="mb-4">
-          <p className="text-xs mb-2" style={{ color: '#6b7280' }}>Entry Price</p>
+          <p className="text-xs mb-2" style={{ color: 'var(--text-muted)' }}>Entry Price</p>
           <input
             type="number"
             placeholder="Enter price"
             value={pendingPrice}
             onChange={(e) => setPendingPrice(e.target.value)}
             className="w-full p-3 rounded-lg text-sm"
-            style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a', color: '#fff' }}
+            style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)', color: 'var(--text-primary)' }}
           />
         </div>
       )}
 
       {/* Volume */}
       <div className="mb-4">
-        <p className="text-xs mb-2" style={{ color: '#6b7280' }}>Volume (Lots)</p>
+        <p className="text-xs mb-2" style={{ color: 'var(--text-muted)' }}>Volume (Lots)</p>
         <div 
           className="flex items-center rounded-lg"
-          style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a' }}
+          style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}
         >
           <button onClick={() => adjustVolume(-0.01)} className="p-3">
             <Minus size={16} color="#9ca3af" />
@@ -168,7 +168,7 @@ const MobileOrder = ({ symbol }) => {
             value={volume}
             onChange={(e) => setVolume(Math.max(0.01, parseFloat(e.target.value) || 0.01))}
             className="flex-1 bg-transparent text-center text-sm"
-            style={{ color: '#fff' }}
+            style={{ color: 'var(--text-primary)' }}
             step="0.01"
           />
           <button onClick={() => adjustVolume(0.01)} className="p-3">
@@ -182,7 +182,7 @@ const MobileOrder = ({ symbol }) => {
         <button
           onClick={() => setShowTP(!showTP)}
           className="w-full flex items-center justify-between p-3 rounded-lg"
-          style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a' }}
+          style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}
         >
           <span className="text-sm" style={{ color: '#22c55e' }}>Take Profit</span>
           <Plus size={16} color="#22c55e" />
@@ -194,14 +194,14 @@ const MobileOrder = ({ symbol }) => {
             value={takeProfit}
             onChange={(e) => setTakeProfit(e.target.value)}
             className="w-full p-3 rounded-lg text-sm"
-            style={{ backgroundColor: '#1f2937', border: '1px solid #374151', color: '#fff' }}
+            style={{ backgroundColor: '#1f2937', border: '1px solid #374151', color: 'var(--text-primary)' }}
           />
         )}
 
         <button
           onClick={() => setShowSL(!showSL)}
           className="w-full flex items-center justify-between p-3 rounded-lg"
-          style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a' }}
+          style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}
         >
           <span className="text-sm" style={{ color: '#ef4444' }}>Stop Loss</span>
           <Plus size={16} color="#ef4444" />
@@ -213,7 +213,7 @@ const MobileOrder = ({ symbol }) => {
             value={stopLoss}
             onChange={(e) => setStopLoss(e.target.value)}
             className="w-full p-3 rounded-lg text-sm"
-            style={{ backgroundColor: '#1f2937', border: '1px solid #374151', color: '#fff' }}
+            style={{ backgroundColor: '#1f2937', border: '1px solid #374151', color: 'var(--text-primary)' }}
           />
         )}
       </div>
@@ -221,15 +221,15 @@ const MobileOrder = ({ symbol }) => {
       {/* Info */}
       <div 
         className="p-3 rounded-lg mb-4"
-        style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a' }}
+        style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}
       >
         <div className="flex justify-between text-sm mb-2">
-          <span style={{ color: '#6b7280' }}>Margin</span>
-          <span style={{ color: '#fff' }}>${margin}</span>
+          <span style={{ color: 'var(--text-muted)' }}>Margin</span>
+          <span style={{ color: 'var(--text-primary)' }}>${margin}</span>
         </div>
         <div className="flex justify-between text-sm">
-          <span style={{ color: '#6b7280' }}>Free</span>
-          <span style={{ color: '#fff' }}>${balance.toFixed(2)}</span>
+          <span style={{ color: 'var(--text-muted)' }}>Free</span>
+          <span style={{ color: 'var(--text-primary)' }}>${balance.toFixed(2)}</span>
         </div>
       </div>
 
@@ -255,7 +255,7 @@ const MobileOrder = ({ symbol }) => {
 
       {/* Order Summary */}
       <div className="mt-3 text-center">
-        <p className="text-xs" style={{ color: '#6b7280' }}>
+        <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
           {orderType === 'market' ? 'Market' : 'Pending'} • {volume} lots @ {orderType === 'market' 
             ? executionPrice?.toFixed(symbol.includes('JPY') ? 3 : 5) 
             : pendingPrice || '-.--'}

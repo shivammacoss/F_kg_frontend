@@ -91,9 +91,9 @@ const MobilePositions = () => {
   }
 
   return (
-    <div className="h-full flex flex-col" style={{ backgroundColor: '#000000' }}>
+    <div className="h-full flex flex-col" style={{ backgroundColor: 'var(--bg-primary)' }}>
       {/* Tabs */}
-      <div className="flex" style={{ borderBottom: '1px solid #1a1a1a' }}>
+      <div className="flex" style={{ borderBottom: '1px solid var(--border-color)' }}>
         {tabs.map(tab => (
           <button
             key={tab.id}
@@ -113,14 +113,14 @@ const MobilePositions = () => {
       <div className="flex-1 overflow-y-auto">
         {getDisplayTrades().length === 0 ? (
           <div className="flex items-center justify-center h-32">
-            <p className="text-sm" style={{ color: '#6b7280' }}>No {activeTab}</p>
+            <p className="text-sm" style={{ color: 'var(--text-muted)' }}>No {activeTab}</p>
           </div>
         ) : (
           getDisplayTrades().map(trade => (
             <div 
               key={trade._id}
               className="p-3"
-              style={{ borderBottom: '1px solid #1a1a1a' }}
+              style={{ borderBottom: '1px solid var(--border-color)' }}
             >
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
@@ -133,7 +133,7 @@ const MobilePositions = () => {
                   >
                     {trade.type?.toUpperCase()}
                   </span>
-                  <span className="text-sm font-medium" style={{ color: '#fff' }}>{trade.symbol}</span>
+                  <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{trade.symbol}</span>
                 </div>
                 {activeTab === 'positions' && (
                   <button onClick={() => closeTrade(trade._id)} className="p-1">
@@ -142,7 +142,7 @@ const MobilePositions = () => {
                 )}
               </div>
               <div className="flex justify-between text-xs">
-                <span style={{ color: '#6b7280' }}>{trade.amount} lots @ {trade.price?.toFixed(5)}</span>
+                <span style={{ color: 'var(--text-muted)' }}>{trade.amount} lots @ {trade.price?.toFixed(5)}</span>
                 <span style={{ color: (trade.profit || 0) >= 0 ? '#22c55e' : '#ef4444' }}>
                   {(trade.profit || 0) >= 0 ? '+' : ''}${(trade.profit || 0).toFixed(2)}
                 </span>

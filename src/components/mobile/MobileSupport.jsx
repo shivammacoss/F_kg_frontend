@@ -105,7 +105,7 @@ const MobileSupport = ({ onBack }) => {
 
   if (loading) {
     return (
-      <div className="h-full flex items-center justify-center" style={{ backgroundColor: '#000000' }}>
+      <div className="h-full flex items-center justify-center" style={{ backgroundColor: 'var(--bg-primary)' }}>
         <Loader2 className="animate-spin" size={24} color="#6b7280" />
       </div>
     )
@@ -114,13 +114,13 @@ const MobileSupport = ({ onBack }) => {
   // Ticket detail view
   if (selectedTicket) {
     return (
-      <div className="h-full flex flex-col" style={{ backgroundColor: '#000000' }}>
-        <div className="flex items-center gap-3 px-4 py-3" style={{ backgroundColor: '#0d0d0d', borderBottom: '1px solid #1a1a1a' }}>
-          <button onClick={() => setSelectedTicket(null)} className="p-2 rounded-lg" style={{ backgroundColor: '#1a1a1a' }}>
+      <div className="h-full flex flex-col" style={{ backgroundColor: 'var(--bg-primary)' }}>
+        <div className="flex items-center gap-3 px-4 py-3" style={{ backgroundColor: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-color)' }}>
+          <button onClick={() => setSelectedTicket(null)} className="p-2 rounded-lg" style={{ backgroundColor: 'var(--bg-hover)' }}>
             <ChevronLeft size={18} color="#9ca3af" />
           </button>
           <div className="flex-1">
-            <p className="text-sm font-medium" style={{ color: '#fff' }}>{selectedTicket.subject}</p>
+            <p className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{selectedTicket.subject}</p>
             <span className="text-xs px-2 py-0.5 rounded capitalize" style={{ backgroundColor: `${getStatusColor(selectedTicket.status)}20`, color: getStatusColor(selectedTicket.status) }}>
               {selectedTicket.status}
             </span>
@@ -130,9 +130,9 @@ const MobileSupport = ({ onBack }) => {
         <div className="flex-1 overflow-y-auto p-4 space-y-3">
           {selectedTicket.messages?.map((msg, i) => (
             <div key={i} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-              <div className="max-w-[80%] p-3 rounded-xl" style={{ backgroundColor: msg.sender === 'user' ? '#22c55e' : '#1a1a1a' }}>
+              <div className="max-w-[80%] p-3 rounded-xl" style={{ backgroundColor: msg.sender === 'user' ? '#22c55e' : 'var(--bg-hover)' }}>
                 <p className="text-sm" style={{ color: msg.sender === 'user' ? '#000' : '#fff' }}>{msg.content}</p>
-                <p className="text-xs mt-1" style={{ color: msg.sender === 'user' ? '#000000aa' : '#6b7280' }}>
+                <p className="text-xs mt-1" style={{ color: msg.sender === 'user' ? '#000000aa' : 'var(--text-muted)' }}>
                   {new Date(msg.createdAt).toLocaleTimeString()}
                 </p>
               </div>
@@ -142,13 +142,13 @@ const MobileSupport = ({ onBack }) => {
         </div>
 
         {selectedTicket.status !== 'closed' && selectedTicket.status !== 'resolved' && (
-          <div className="p-4 flex gap-2" style={{ borderTop: '1px solid #1a1a1a' }}>
+          <div className="p-4 flex gap-2" style={{ borderTop: '1px solid var(--border-color)' }}>
             <input
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
               placeholder="Type a message..."
               className="flex-1 p-3 rounded-lg text-sm"
-              style={{ backgroundColor: '#1a1a1a', color: '#fff', border: '1px solid #262626' }}
+              style={{ backgroundColor: 'var(--bg-hover)', color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}
               onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
             />
             <button onClick={handleSendMessage} disabled={sending} className="p-3 rounded-lg" style={{ backgroundColor: '#22c55e' }}>
@@ -161,13 +161,13 @@ const MobileSupport = ({ onBack }) => {
   }
 
   return (
-    <div className="h-full flex flex-col" style={{ backgroundColor: '#000000' }}>
-      <div className="flex items-center justify-between px-4 py-3" style={{ backgroundColor: '#0d0d0d', borderBottom: '1px solid #1a1a1a' }}>
+    <div className="h-full flex flex-col" style={{ backgroundColor: 'var(--bg-primary)' }}>
+      <div className="flex items-center justify-between px-4 py-3" style={{ backgroundColor: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-color)' }}>
         <div className="flex items-center gap-3">
-          <button onClick={onBack} className="p-2 rounded-lg" style={{ backgroundColor: '#1a1a1a' }}>
+          <button onClick={onBack} className="p-2 rounded-lg" style={{ backgroundColor: 'var(--bg-hover)' }}>
             <ArrowLeft size={18} color="#9ca3af" />
           </button>
-          <h1 className="text-lg font-semibold" style={{ color: '#fff' }}>Support</h1>
+          <h1 className="text-lg font-semibold" style={{ color: 'var(--text-primary)' }}>Support</h1>
         </div>
         <button onClick={() => setShowNewTicket(true)} className="p-2 rounded-lg" style={{ backgroundColor: '#22c55e' }}>
           <Plus size={18} color="#000" />
@@ -178,32 +178,32 @@ const MobileSupport = ({ onBack }) => {
         {tickets.length === 0 ? (
           <div className="text-center py-8">
             <MessageCircle size={32} color="#6b7280" className="mx-auto mb-2" />
-            <p className="text-sm" style={{ color: '#6b7280' }}>No support tickets</p>
+            <p className="text-sm" style={{ color: 'var(--text-muted)' }}>No support tickets</p>
           </div>
         ) : tickets.map(ticket => (
           <button
             key={ticket._id}
             onClick={() => fetchTicketDetails(ticket._id)}
             className="w-full p-3 rounded-xl mb-2 text-left"
-            style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a' }}
+            style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}
           >
             <div className="flex items-center justify-between mb-1">
-              <p className="text-sm font-medium" style={{ color: '#fff' }}>{ticket.subject}</p>
+              <p className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{ticket.subject}</p>
               <span className="text-xs px-2 py-0.5 rounded capitalize" style={{ backgroundColor: `${getStatusColor(ticket.status)}20`, color: getStatusColor(ticket.status) }}>
                 {ticket.status}
               </span>
             </div>
-            <p className="text-xs" style={{ color: '#6b7280' }}>{ticket.category} • {new Date(ticket.createdAt).toLocaleDateString()}</p>
+            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{ticket.category} • {new Date(ticket.createdAt).toLocaleDateString()}</p>
           </button>
         ))}
       </div>
 
       {showNewTicket && (
         <div className="fixed inset-0 z-50 flex items-end" style={{ backgroundColor: 'rgba(0,0,0,0.7)' }}>
-          <div className="w-full p-4 rounded-t-2xl" style={{ backgroundColor: '#0d0d0d' }}>
+          <div className="w-full p-4 rounded-t-2xl" style={{ backgroundColor: 'var(--bg-secondary)' }}>
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold" style={{ color: '#fff' }}>New Ticket</h3>
-              <button onClick={() => setShowNewTicket(false)} className="p-2 rounded-lg" style={{ backgroundColor: '#1a1a1a' }}>
+              <h3 className="text-lg font-semibold" style={{ color: 'var(--text-primary)' }}>New Ticket</h3>
+              <button onClick={() => setShowNewTicket(false)} className="p-2 rounded-lg" style={{ backgroundColor: 'var(--bg-hover)' }}>
                 <X size={18} color="#9ca3af" />
               </button>
             </div>
@@ -213,13 +213,13 @@ const MobileSupport = ({ onBack }) => {
               value={newTicketForm.subject}
               onChange={(e) => setNewTicketForm({ ...newTicketForm, subject: e.target.value })}
               className="w-full p-3 rounded-lg mb-3 text-sm"
-              style={{ backgroundColor: '#1a1a1a', color: '#fff', border: '1px solid #262626' }}
+              style={{ backgroundColor: 'var(--bg-hover)', color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}
             />
             <select
               value={newTicketForm.category}
               onChange={(e) => setNewTicketForm({ ...newTicketForm, category: e.target.value })}
               className="w-full p-3 rounded-lg mb-3 text-sm"
-              style={{ backgroundColor: '#1a1a1a', color: '#fff', border: '1px solid #262626' }}
+              style={{ backgroundColor: 'var(--bg-hover)', color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}
             >
               {categories.map(c => <option key={c.value} value={c.value}>{c.label}</option>)}
             </select>
@@ -229,7 +229,7 @@ const MobileSupport = ({ onBack }) => {
               onChange={(e) => setNewTicketForm({ ...newTicketForm, message: e.target.value })}
               rows={4}
               className="w-full p-3 rounded-lg mb-3 text-sm"
-              style={{ backgroundColor: '#1a1a1a', color: '#fff', border: '1px solid #262626' }}
+              style={{ backgroundColor: 'var(--bg-hover)', color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}
             />
             <button
               onClick={handleCreateTicket}

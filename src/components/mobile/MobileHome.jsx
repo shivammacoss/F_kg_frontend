@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Wallet, TrendingUp, TrendingDown, BarChart3, ArrowUpRight, Activity, Target, Clock, Newspaper, Calendar, RefreshCw, Globe, Zap } from 'lucide-react'
 import axios from 'axios'
 
-const MobileHome = () => {
+const MobileHome = ({ onNavigate }) => {
   const [userData, setUserData] = useState({
     name: 'Trader',
     balance: 0,
@@ -150,27 +150,27 @@ const MobileHome = () => {
   }
 
   return (
-    <div className="h-full overflow-y-auto p-4 pb-20" style={{ backgroundColor: '#000000' }}>
+    <div className="h-full overflow-y-auto p-4 pb-20" style={{ backgroundColor: 'var(--bg-primary)' }}>
       {/* Header */}
       <div className="mb-4">
-        <p className="text-xs" style={{ color: '#6b7280' }}>{getGreeting()}</p>
-        <h1 className="text-lg font-bold" style={{ color: '#fff' }}>{userData.name}! 👋</h1>
+        <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{getGreeting()}</p>
+        <h1 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>{userData.name}! 👋</h1>
       </div>
 
       {/* Balance & Equity Card */}
-      <div className="p-4 rounded-xl mb-3" style={{ background: 'linear-gradient(135deg, #1a1a2e 0%, #0d0d0d 100%)', border: '1px solid #262626' }}>
+      <div className="p-4 rounded-xl mb-3" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: '#3b82f6' }}>
               <Wallet size={16} color="#fff" />
             </div>
             <div>
-              <p className="text-xs" style={{ color: '#6b7280' }}>Balance</p>
-              <p className="text-lg font-bold" style={{ color: '#fff' }}>${userData.balance?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+              <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Balance</p>
+              <p className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>${userData.balance?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
             </div>
           </div>
           <div className="text-right">
-            <p className="text-xs" style={{ color: '#6b7280' }}>Equity</p>
+            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Equity</p>
             <p className="text-lg font-bold" style={{ color: '#3b82f6' }}>${userData.equity?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
           </div>
         </div>
@@ -184,20 +184,20 @@ const MobileHome = () => {
 
       {/* P&L Cards */}
       <div className="grid grid-cols-3 gap-2 mb-3">
-        <div className="p-3 rounded-xl" style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a' }}>
-          <p className="text-xs mb-1" style={{ color: '#6b7280' }}>Today</p>
+        <div className="p-3 rounded-xl" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
+          <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>Today</p>
           <p className="text-sm font-bold" style={{ color: userData.todayPnL >= 0 ? '#22c55e' : '#ef4444' }}>
             {userData.todayPnL >= 0 ? '+' : ''}${userData.todayPnL?.toFixed(2)}
           </p>
         </div>
-        <div className="p-3 rounded-xl" style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a' }}>
-          <p className="text-xs mb-1" style={{ color: '#6b7280' }}>7 Days</p>
+        <div className="p-3 rounded-xl" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
+          <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>7 Days</p>
           <p className="text-sm font-bold" style={{ color: userData.weekPnL >= 0 ? '#22c55e' : '#ef4444' }}>
             {userData.weekPnL >= 0 ? '+' : ''}${userData.weekPnL?.toFixed(2)}
           </p>
         </div>
-        <div className="p-3 rounded-xl" style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a' }}>
-          <p className="text-xs mb-1" style={{ color: '#6b7280' }}>30 Days</p>
+        <div className="p-3 rounded-xl" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
+          <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>30 Days</p>
           <p className="text-sm font-bold" style={{ color: userData.monthPnL >= 0 ? '#22c55e' : '#ef4444' }}>
             {userData.monthPnL >= 0 ? '+' : ''}${userData.monthPnL?.toFixed(2)}
           </p>
@@ -206,31 +206,31 @@ const MobileHome = () => {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-2 gap-2 mb-3">
-        <div className="p-3 rounded-xl" style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a' }}>
+        <div className="p-3 rounded-xl" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
           <div className="flex items-center gap-2 mb-1">
             <BarChart3 size={14} color="#8b5cf6" />
-            <span className="text-xs" style={{ color: '#6b7280' }}>Total Trades</span>
+            <span className="text-xs" style={{ color: 'var(--text-muted)' }}>Total Trades</span>
           </div>
-          <p className="text-lg font-bold" style={{ color: '#fff' }}>{userData.totalTrades}</p>
+          <p className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>{userData.totalTrades}</p>
         </div>
-        <div className="p-3 rounded-xl" style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a' }}>
+        <div className="p-3 rounded-xl" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
           <div className="flex items-center gap-2 mb-1">
             <Target size={14} color="#22c55e" />
-            <span className="text-xs" style={{ color: '#6b7280' }}>Win Rate</span>
+            <span className="text-xs" style={{ color: 'var(--text-muted)' }}>Win Rate</span>
           </div>
           <p className="text-lg font-bold" style={{ color: userData.winRate >= 50 ? '#22c55e' : '#ef4444' }}>{userData.winRate}%</p>
         </div>
-        <div className="p-3 rounded-xl" style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a' }}>
+        <div className="p-3 rounded-xl" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
           <div className="flex items-center gap-2 mb-1">
             <TrendingUp size={14} color="#22c55e" />
-            <span className="text-xs" style={{ color: '#6b7280' }}>Avg Profit</span>
+            <span className="text-xs" style={{ color: 'var(--text-muted)' }}>Avg Profit</span>
           </div>
           <p className="text-lg font-bold" style={{ color: '#22c55e' }}>+${userData.avgProfit?.toFixed(2)}</p>
         </div>
-        <div className="p-3 rounded-xl" style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a' }}>
+        <div className="p-3 rounded-xl" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
           <div className="flex items-center gap-2 mb-1">
             <TrendingDown size={14} color="#ef4444" />
-            <span className="text-xs" style={{ color: '#6b7280' }}>Avg Loss</span>
+            <span className="text-xs" style={{ color: 'var(--text-muted)' }}>Avg Loss</span>
           </div>
           <p className="text-lg font-bold" style={{ color: '#ef4444' }}>-${userData.avgLoss?.toFixed(2)}</p>
         </div>
@@ -238,11 +238,19 @@ const MobileHome = () => {
 
       {/* Quick Actions */}
       <div className="grid grid-cols-2 gap-2 mb-4">
-        <button className="p-3 rounded-xl flex items-center justify-center gap-2" style={{ backgroundColor: '#22c55e' }}>
+        <button 
+          onClick={() => onNavigate?.('trade')}
+          className="p-3 rounded-xl flex items-center justify-center gap-2" 
+          style={{ backgroundColor: '#22c55e' }}
+        >
           <ArrowUpRight size={16} color="#000" />
           <span className="font-medium text-sm" style={{ color: '#000' }}>Trade</span>
         </button>
-        <button className="p-3 rounded-xl flex items-center justify-center gap-2" style={{ backgroundColor: '#3b82f6' }}>
+        <button 
+          onClick={() => onNavigate?.('wallet')}
+          className="p-3 rounded-xl flex items-center justify-center gap-2" 
+          style={{ backgroundColor: '#3b82f6' }}
+        >
           <Wallet size={16} color="#fff" />
           <span className="font-medium text-sm" style={{ color: '#fff' }}>Deposit</span>
         </button>
@@ -253,22 +261,22 @@ const MobileHome = () => {
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
             <Calendar size={14} color="#fbbf24" />
-            <span className="text-sm font-medium" style={{ color: '#fff' }}>Economic Calendar</span>
+            <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>Economic Calendar</span>
           </div>
           <span className="text-xs px-2 py-0.5 rounded-full" style={{ backgroundColor: '#22c55e', color: '#000' }}>Live</span>
         </div>
-        <div className="rounded-xl overflow-hidden" style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a' }}>
+        <div className="rounded-xl overflow-hidden" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
           {events.length === 0 ? (
-            <div className="p-4 text-center text-xs" style={{ color: '#6b7280' }}>No events today</div>
+            <div className="p-4 text-center text-xs" style={{ color: 'var(--text-muted)' }}>No events today</div>
           ) : (
             events.slice(0, 4).map((event, idx) => (
-              <div key={event.id || idx} className="p-3 flex items-center justify-between" style={{ borderBottom: idx < 3 ? '1px solid #1a1a1a' : 'none' }}>
+              <div key={event.id || idx} className="p-3 flex items-center justify-between" style={{ borderBottom: idx < 3 ? '1px solid var(--border-color)' : 'none' }}>
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-xs font-medium px-1.5 py-0.5 rounded" style={{ backgroundColor: '#1a1a1a', color: '#3b82f6' }}>{event.currency}</span>
-                    <span className="text-xs" style={{ color: '#6b7280' }}>{new Date(event.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                    <span className="text-xs font-medium px-1.5 py-0.5 rounded" style={{ backgroundColor: 'var(--bg-hover)', color: '#3b82f6' }}>{event.currency}</span>
+                    <span className="text-xs" style={{ color: 'var(--text-muted)' }}>{new Date(event.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                   </div>
-                  <p className="text-xs" style={{ color: '#fff' }}>{event.event}</p>
+                  <p className="text-xs" style={{ color: 'var(--text-primary)' }}>{event.event}</p>
                 </div>
                 <span className={`text-xs px-2 py-0.5 rounded ${event.impact === 'high' ? 'bg-red-500/20 text-red-400' : event.impact === 'medium' ? 'bg-yellow-500/20 text-yellow-400' : 'bg-gray-500/20 text-gray-400'}`}>
                   {event.impact}
@@ -284,7 +292,7 @@ const MobileHome = () => {
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
             <Newspaper size={14} color="#3b82f6" />
-            <span className="text-sm font-medium" style={{ color: '#fff' }}>Market News</span>
+            <span className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>Market News</span>
           </div>
           {newsLoading && <RefreshCw size={12} className="animate-spin" color="#6b7280" />}
         </div>
@@ -296,15 +304,15 @@ const MobileHome = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="block p-3 rounded-xl"
-              style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a' }}
+              style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}
             >
               <div className="flex items-start justify-between gap-2 mb-1">
-                <p className="text-xs font-medium line-clamp-2" style={{ color: '#fff' }}>{item.title}</p>
+                <p className="text-xs font-medium line-clamp-2" style={{ color: 'var(--text-primary)' }}>{item.title}</p>
                 <span className={`text-xs px-1.5 py-0.5 rounded flex-shrink-0 ${item.impact === 'high' ? 'bg-red-500/20 text-red-400' : item.impact === 'medium' ? 'bg-yellow-500/20 text-yellow-400' : 'bg-gray-500/20 text-gray-400'}`}>
                   {item.impact}
                 </span>
               </div>
-              <div className="flex items-center gap-2 text-xs" style={{ color: '#6b7280' }}>
+              <div className="flex items-center gap-2 text-xs" style={{ color: 'var(--text-muted)' }}>
                 <span style={{ color: '#3b82f6' }}>{item.source}</span>
                 <span>•</span>
                 <span>{getTimeAgo(item.time)}</span>

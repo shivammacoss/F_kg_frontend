@@ -143,7 +143,7 @@ const MobileCopyTrade = ({ onBack }) => {
 
   if (loading) {
     return (
-      <div className="h-full flex items-center justify-center" style={{ backgroundColor: '#000000' }}>
+      <div className="h-full flex items-center justify-center" style={{ backgroundColor: 'var(--bg-primary)' }}>
         <Loader2 className="animate-spin" size={24} color="#6b7280" />
       </div>
     )
@@ -156,19 +156,19 @@ const MobileCopyTrade = ({ onBack }) => {
   ]
 
   return (
-    <div className="h-full flex flex-col" style={{ backgroundColor: '#000000' }}>
+    <div className="h-full flex flex-col" style={{ backgroundColor: 'var(--bg-primary)' }}>
       {/* Header */}
       <div 
         className="flex items-center justify-between px-4 py-3"
-        style={{ backgroundColor: '#0d0d0d', borderBottom: '1px solid #1a1a1a' }}
+        style={{ backgroundColor: 'var(--bg-secondary)', borderBottom: '1px solid var(--border-color)' }}
       >
         <div className="flex items-center gap-3">
-          <button onClick={onBack} className="p-2 rounded-lg" style={{ backgroundColor: '#1a1a1a' }}>
+          <button onClick={onBack} className="p-2 rounded-lg" style={{ backgroundColor: 'var(--bg-hover)' }}>
             <ArrowLeft size={18} color="#9ca3af" />
           </button>
           <div>
-            <h1 className="text-lg font-semibold" style={{ color: '#fff' }}>Copy Trade</h1>
-            <p className="text-xs" style={{ color: '#6b7280' }}>Follow expert traders</p>
+            <h1 className="text-lg font-semibold" style={{ color: 'var(--text-primary)' }}>Copy Trade</h1>
+            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Follow expert traders</p>
           </div>
         </div>
         {!myMasterStatus?.isMaster && myMasterStatus?.latestRequest?.status !== 'pending' && (
@@ -185,7 +185,7 @@ const MobileCopyTrade = ({ onBack }) => {
       </div>
 
       {/* Tabs */}
-      <div className="flex" style={{ borderBottom: '1px solid #1a1a1a' }}>
+      <div className="flex" style={{ borderBottom: '1px solid var(--border-color)' }}>
         {tabs.map(tab => (
           <button
             key={tab.id}
@@ -207,14 +207,14 @@ const MobileCopyTrade = ({ onBack }) => {
             {/* Search and Filters */}
             <div className="mb-4 space-y-2">
               <div className="relative">
-                <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: '#6b7280' }} />
+                <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: 'var(--text-muted)' }} />
                 <input
                   type="text"
                   placeholder="Search masters..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full pl-9 pr-10 py-2 rounded-lg text-sm"
-                  style={{ backgroundColor: '#1a1a1a', border: '1px solid #262626', color: '#fff' }}
+                  style={{ backgroundColor: 'var(--bg-hover)', border: '1px solid var(--border-color)', color: 'var(--text-primary)' }}
                 />
                 <button 
                   onClick={() => setShowFilters(!showFilters)}
@@ -230,7 +230,7 @@ const MobileCopyTrade = ({ onBack }) => {
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
                     className="flex-1 p-2 rounded-lg text-xs"
-                    style={{ backgroundColor: '#1a1a1a', border: '1px solid #262626', color: '#fff' }}
+                    style={{ backgroundColor: 'var(--bg-hover)', border: '1px solid var(--border-color)', color: 'var(--text-primary)' }}
                   >
                     <option value="followers">Most Followers</option>
                     <option value="profit">Highest Profit</option>
@@ -240,7 +240,7 @@ const MobileCopyTrade = ({ onBack }) => {
                     value={riskFilter}
                     onChange={(e) => setRiskFilter(e.target.value)}
                     className="flex-1 p-2 rounded-lg text-xs"
-                    style={{ backgroundColor: '#1a1a1a', border: '1px solid #262626', color: '#fff' }}
+                    style={{ backgroundColor: 'var(--bg-hover)', border: '1px solid var(--border-color)', color: 'var(--text-primary)' }}
                   >
                     <option value="all">All Risk</option>
                     <option value="Low">Low</option>
@@ -255,10 +255,10 @@ const MobileCopyTrade = ({ onBack }) => {
               {filteredMasters.length === 0 ? (
                 <div className="text-center py-8">
                   <Users size={32} color="#6b7280" className="mx-auto mb-2" />
-                  <p className="text-sm" style={{ color: '#6b7280' }}>No masters found</p>
+                  <p className="text-sm" style={{ color: 'var(--text-muted)' }}>No masters found</p>
                 </div>
               ) : filteredMasters.map(master => (
-                <div key={master._id} className="p-3 rounded-xl" style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a' }}>
+                <div key={master._id} className="p-3 rounded-xl" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
                   <div className="flex items-start justify-between mb-2">
                     <div className="flex items-center gap-2">
                       <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-sm font-bold">
@@ -266,10 +266,10 @@ const MobileCopyTrade = ({ onBack }) => {
                       </div>
                       <div>
                         <div className="flex items-center gap-1">
-                          <p className="text-sm font-medium" style={{ color: '#fff' }}>{master.displayName}</p>
+                          <p className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{master.displayName}</p>
                           {master.isVerified && <CheckCircle size={12} color="#3b82f6" />}
                         </div>
-                        <p className="text-xs" style={{ color: '#6b7280' }}>{master.strategyType || 'General'}</p>
+                        <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{master.strategyType || 'General'}</p>
                       </div>
                     </div>
                     <span className="px-2 py-0.5 rounded text-xs font-medium" style={{ backgroundColor: `${getRiskColor(master.riskLevel)}20`, color: getRiskColor(master.riskLevel) }}>
@@ -277,31 +277,31 @@ const MobileCopyTrade = ({ onBack }) => {
                     </span>
                   </div>
                   <div className="grid grid-cols-3 gap-2 mb-3 text-center">
-                    <div className="p-2 rounded-lg" style={{ backgroundColor: '#1a1a1a' }}>
+                    <div className="p-2 rounded-lg" style={{ backgroundColor: 'var(--bg-hover)' }}>
                       <p className="text-sm font-bold" style={{ color: '#22c55e' }}>{master.stats?.winRate || 0}%</p>
-                      <p className="text-xs" style={{ color: '#6b7280' }}>Win Rate</p>
+                      <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Win Rate</p>
                     </div>
-                    <div className="p-2 rounded-lg" style={{ backgroundColor: '#1a1a1a' }}>
-                      <p className="text-sm font-bold" style={{ color: '#fff' }}>{master.stats?.activeFollowers || 0}</p>
-                      <p className="text-xs" style={{ color: '#6b7280' }}>Followers</p>
+                    <div className="p-2 rounded-lg" style={{ backgroundColor: 'var(--bg-hover)' }}>
+                      <p className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>{master.stats?.activeFollowers || 0}</p>
+                      <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Followers</p>
                     </div>
-                    <div className="p-2 rounded-lg" style={{ backgroundColor: '#1a1a1a' }}>
+                    <div className="p-2 rounded-lg" style={{ backgroundColor: 'var(--bg-hover)' }}>
                       <p className="text-sm font-bold" style={{ color: (master.stats?.profit30Days || 0) >= 0 ? '#22c55e' : '#ef4444' }}>
                         {(master.stats?.profit30Days || 0) >= 0 ? '+' : ''}{master.stats?.profit30Days || 0}%
                       </p>
-                      <p className="text-xs" style={{ color: '#6b7280' }}>30D Profit</p>
+                      <p className="text-xs" style={{ color: 'var(--text-muted)' }}>30D Profit</p>
                     </div>
                   </div>
                   <div className="flex items-center justify-between mb-3 text-xs">
-                    <span style={{ color: '#6b7280' }}>Commission:</span>
-                    <span style={{ color: '#fff' }}>
+                    <span style={{ color: 'var(--text-muted)' }}>Commission:</span>
+                    <span style={{ color: 'var(--text-primary)' }}>
                       {master.commissionType === 'profit_share' ? `${master.commissionValue}% profit` :
                        master.commissionType === 'per_lot' ? `$${master.commissionValue}/lot` :
                        `$${master.subscriptionFee}/mo`}
                     </span>
                   </div>
                   {master.isFollowing ? (
-                    <button className="w-full py-2 rounded-lg text-xs font-medium flex items-center justify-center gap-1" style={{ backgroundColor: '#1a1a1a', color: '#6b7280' }} disabled>
+                    <button className="w-full py-2 rounded-lg text-xs font-medium flex items-center justify-center gap-1" style={{ backgroundColor: 'var(--bg-hover)', color: 'var(--text-muted)' }} disabled>
                       <CheckCircle size={14} /> Following
                     </button>
                   ) : (
@@ -323,7 +323,7 @@ const MobileCopyTrade = ({ onBack }) => {
             {myFollows.length === 0 ? (
               <div className="text-center py-8">
                 <Users size={32} color="#6b7280" className="mx-auto mb-2" />
-                <p className="text-sm" style={{ color: '#6b7280' }}>Not following anyone</p>
+                <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Not following anyone</p>
                 <button
                   onClick={() => setActiveTab('masters')}
                   className="mt-3 px-4 py-2 rounded-lg text-xs font-medium bg-blue-500 text-white"
@@ -332,16 +332,16 @@ const MobileCopyTrade = ({ onBack }) => {
                 </button>
               </div>
             ) : myFollows.map(follow => (
-              <div key={follow._id} className="p-3 rounded-xl" style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a' }}>
+              <div key={follow._id} className="p-3 rounded-xl" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
                     <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-xs font-bold">
                       {follow.masterId?.displayName?.charAt(0) || 'M'}
                     </div>
                     <div>
-                      <p className="text-sm font-medium" style={{ color: '#fff' }}>{follow.masterId?.displayName || 'Master'}</p>
-                      <p className="text-xs" style={{ color: '#6b7280' }}>{follow.masterId?.strategyType}</p>
-                      <p className="text-xs" style={{ color: '#6b7280' }}>
+                      <p className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{follow.masterId?.displayName || 'Master'}</p>
+                      <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{follow.masterId?.strategyType}</p>
+                      <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
                         {follow.copyMode} • {follow.copyMode === 'fixed_lot' ? `${follow.fixedLot} lots` : `${follow.multiplier}x`}
                       </p>
                     </div>
@@ -359,14 +359,14 @@ const MobileCopyTrade = ({ onBack }) => {
                   </div>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-xs" style={{ color: '#6b7280' }}>
+                  <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
                     {follow.stats?.totalCopiedTrades || 0} trades copied
                   </span>
                   <div className="flex gap-2">
                     <button
                       onClick={() => handleTogglePause(follow._id, follow.status)}
                       className="p-1.5 rounded"
-                      style={{ backgroundColor: '#1a1a1a' }}
+                      style={{ backgroundColor: 'var(--bg-hover)' }}
                       title={follow.status === 'active' ? 'Pause' : 'Resume'}
                     >
                       {follow.status === 'active' ? <Pause size={14} color="#fbbf24" /> : <Play size={14} color="#22c55e" />}
@@ -394,22 +394,22 @@ const MobileCopyTrade = ({ onBack }) => {
       {/* Follow Modal */}
       {showFollowModal && selectedMaster && (
         <div className="fixed inset-0 z-50 flex items-end" style={{ backgroundColor: 'rgba(0,0,0,0.7)' }}>
-          <div className="w-full p-4 rounded-t-2xl max-h-[85vh] overflow-y-auto" style={{ backgroundColor: '#0d0d0d' }}>
+          <div className="w-full p-4 rounded-t-2xl max-h-[85vh] overflow-y-auto" style={{ backgroundColor: 'var(--bg-secondary)' }}>
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold" style={{ color: '#fff' }}>Follow {selectedMaster.displayName}</h3>
-              <button onClick={() => setShowFollowModal(false)} className="p-2 rounded-lg" style={{ backgroundColor: '#1a1a1a' }}>
+              <h3 className="text-lg font-semibold" style={{ color: 'var(--text-primary)' }}>Follow {selectedMaster.displayName}</h3>
+              <button onClick={() => setShowFollowModal(false)} className="p-2 rounded-lg" style={{ backgroundColor: 'var(--bg-hover)' }}>
                 <X size={18} color="#9ca3af" />
               </button>
             </div>
 
             <div className="space-y-3">
               <div>
-                <p className="text-xs mb-1" style={{ color: '#6b7280' }}>Copy Mode</p>
+                <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>Copy Mode</p>
                 <select
                   value={followForm.copyMode}
                   onChange={(e) => setFollowForm({ ...followForm, copyMode: e.target.value })}
                   className="w-full p-2 rounded-lg text-sm"
-                  style={{ backgroundColor: '#1a1a1a', color: '#fff', border: '1px solid #262626' }}
+                  style={{ backgroundColor: 'var(--bg-hover)', color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}
                 >
                   <option value="fixed_lot">Fixed Lot</option>
                   <option value="multiplier">Multiplier</option>
@@ -419,13 +419,13 @@ const MobileCopyTrade = ({ onBack }) => {
 
               {followForm.copyMode === 'fixed_lot' && (
                 <div>
-                  <p className="text-xs mb-1" style={{ color: '#6b7280' }}>Fixed Lot Size</p>
+                  <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>Fixed Lot Size</p>
                   <input
                     type="number"
                     value={followForm.fixedLot}
                     onChange={(e) => setFollowForm({ ...followForm, fixedLot: parseFloat(e.target.value) || 0.01 })}
                     className="w-full p-2 rounded-lg text-sm"
-                    style={{ backgroundColor: '#1a1a1a', color: '#fff', border: '1px solid #262626' }}
+                    style={{ backgroundColor: 'var(--bg-hover)', color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}
                     step="0.01"
                     min="0.01"
                   />
@@ -434,13 +434,13 @@ const MobileCopyTrade = ({ onBack }) => {
 
               {followForm.copyMode === 'multiplier' && (
                 <div>
-                  <p className="text-xs mb-1" style={{ color: '#6b7280' }}>Multiplier (e.g., 0.5 = half, 2 = double)</p>
+                  <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>Multiplier (e.g., 0.5 = half, 2 = double)</p>
                   <input
                     type="number"
                     value={followForm.multiplier}
                     onChange={(e) => setFollowForm({ ...followForm, multiplier: parseFloat(e.target.value) || 1 })}
                     className="w-full p-2 rounded-lg text-sm"
-                    style={{ backgroundColor: '#1a1a1a', color: '#fff', border: '1px solid #262626' }}
+                    style={{ backgroundColor: 'var(--bg-hover)', color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}
                     step="0.1"
                     min="0.1"
                     max="10"
@@ -451,25 +451,25 @@ const MobileCopyTrade = ({ onBack }) => {
               {/* Risk Management */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <p className="text-xs mb-1" style={{ color: '#6b7280' }}>Max Daily Loss %</p>
+                  <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>Max Daily Loss %</p>
                   <input
                     type="number"
                     value={followForm.maxDailyLossPercent}
                     onChange={(e) => setFollowForm({ ...followForm, maxDailyLossPercent: parseInt(e.target.value) || 10 })}
                     className="w-full p-2 rounded-lg text-sm"
-                    style={{ backgroundColor: '#1a1a1a', color: '#fff', border: '1px solid #262626' }}
+                    style={{ backgroundColor: 'var(--bg-hover)', color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}
                     min="1"
                     max="100"
                   />
                 </div>
                 <div>
-                  <p className="text-xs mb-1" style={{ color: '#6b7280' }}>Max Drawdown %</p>
+                  <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>Max Drawdown %</p>
                   <input
                     type="number"
                     value={followForm.maxDrawdownPercent}
                     onChange={(e) => setFollowForm({ ...followForm, maxDrawdownPercent: parseInt(e.target.value) || 30 })}
                     className="w-full p-2 rounded-lg text-sm"
-                    style={{ backgroundColor: '#1a1a1a', color: '#fff', border: '1px solid #262626' }}
+                    style={{ backgroundColor: 'var(--bg-hover)', color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}
                     min="1"
                     max="100"
                   />
@@ -477,13 +477,13 @@ const MobileCopyTrade = ({ onBack }) => {
               </div>
 
               <div>
-                <p className="text-xs mb-1" style={{ color: '#6b7280' }}>Max Lot Size</p>
+                <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>Max Lot Size</p>
                 <input
                   type="number"
                   value={followForm.maxLotSize}
                   onChange={(e) => setFollowForm({ ...followForm, maxLotSize: parseFloat(e.target.value) || 5 })}
                   className="w-full p-2 rounded-lg text-sm"
-                  style={{ backgroundColor: '#1a1a1a', color: '#fff', border: '1px solid #262626' }}
+                  style={{ backgroundColor: 'var(--bg-hover)', color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}
                   step="0.1"
                   min="0.01"
                 />
@@ -522,10 +522,10 @@ const MobileCopyTrade = ({ onBack }) => {
       {/* Request Master Modal */}
       {showRequestModal && (
         <div className="fixed inset-0 z-50 flex items-end" style={{ backgroundColor: 'rgba(0,0,0,0.7)' }}>
-          <div className="w-full p-4 rounded-t-2xl max-h-[85vh] overflow-y-auto" style={{ backgroundColor: '#0d0d0d' }}>
+          <div className="w-full p-4 rounded-t-2xl max-h-[85vh] overflow-y-auto" style={{ backgroundColor: 'var(--bg-secondary)' }}>
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold" style={{ color: '#fff' }}>Become a Trade Master</h3>
-              <button onClick={() => setShowRequestModal(false)} className="p-2 rounded-lg" style={{ backgroundColor: '#1a1a1a' }}>
+              <h3 className="text-lg font-semibold" style={{ color: 'var(--text-primary)' }}>Become a Trade Master</h3>
+              <button onClick={() => setShowRequestModal(false)} className="p-2 rounded-lg" style={{ backgroundColor: 'var(--bg-hover)' }}>
                 <X size={18} color="#9ca3af" />
               </button>
             </div>
@@ -533,86 +533,86 @@ const MobileCopyTrade = ({ onBack }) => {
             <div className="space-y-3">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <p className="text-xs mb-1" style={{ color: '#6b7280' }}>Years of Experience</p>
+                  <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>Years of Experience</p>
                   <input
                     type="number"
                     value={requestForm.experienceYears}
                     onChange={(e) => setRequestForm({ ...requestForm, experienceYears: parseInt(e.target.value) || 1 })}
                     className="w-full p-2 rounded-lg text-sm"
-                    style={{ backgroundColor: '#1a1a1a', color: '#fff', border: '1px solid #262626' }}
+                    style={{ backgroundColor: 'var(--bg-hover)', color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}
                     min="0"
                   />
                 </div>
                 <div>
-                  <p className="text-xs mb-1" style={{ color: '#6b7280' }}>Min Copy Amount ($)</p>
+                  <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>Min Copy Amount ($)</p>
                   <input
                     type="number"
                     value={requestForm.minCapital}
                     onChange={(e) => setRequestForm({ ...requestForm, minCapital: parseInt(e.target.value) || 1000 })}
                     className="w-full p-2 rounded-lg text-sm"
-                    style={{ backgroundColor: '#1a1a1a', color: '#fff', border: '1px solid #262626' }}
+                    style={{ backgroundColor: 'var(--bg-hover)', color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}
                     min="100"
                   />
                 </div>
               </div>
 
               <div>
-                <p className="text-xs mb-1" style={{ color: '#6b7280' }}>Trading Strategy</p>
+                <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>Trading Strategy</p>
                 <input
                   type="text"
                   placeholder="e.g., Forex Scalping, Swing Trading"
                   value={requestForm.strategy}
                   onChange={(e) => setRequestForm({ ...requestForm, strategy: e.target.value })}
                   className="w-full p-2 rounded-lg text-sm"
-                  style={{ backgroundColor: '#1a1a1a', color: '#fff', border: '1px solid #262626' }}
+                  style={{ backgroundColor: 'var(--bg-hover)', color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}
                 />
               </div>
 
               <div>
-                <p className="text-xs mb-1" style={{ color: '#6b7280' }}>Description</p>
+                <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>Description</p>
                 <textarea
                   placeholder="Describe your trading approach..."
                   rows={3}
                   value={requestForm.description}
                   onChange={(e) => setRequestForm({ ...requestForm, description: e.target.value })}
                   className="w-full p-2 rounded-lg text-sm resize-none"
-                  style={{ backgroundColor: '#1a1a1a', color: '#fff', border: '1px solid #262626' }}
+                  style={{ backgroundColor: 'var(--bg-hover)', color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <p className="text-xs mb-1" style={{ color: '#6b7280' }}>Commission Type</p>
+                  <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>Commission Type</p>
                   <select
                     value={requestForm.preferredCommissionType}
                     onChange={(e) => setRequestForm({ ...requestForm, preferredCommissionType: e.target.value })}
                     className="w-full p-2 rounded-lg text-sm"
-                    style={{ backgroundColor: '#1a1a1a', color: '#fff', border: '1px solid #262626' }}
+                    style={{ backgroundColor: 'var(--bg-hover)', color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}
                   >
                     <option value="profit_share">Profit Share %</option>
                     <option value="per_lot">Per Lot Fee</option>
                   </select>
                 </div>
                 <div>
-                  <p className="text-xs mb-1" style={{ color: '#6b7280' }}>Commission Value</p>
+                  <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>Commission Value</p>
                   <input
                     type="number"
                     value={requestForm.preferredCommissionValue}
                     onChange={(e) => setRequestForm({ ...requestForm, preferredCommissionValue: parseInt(e.target.value) || 20 })}
                     className="w-full p-2 rounded-lg text-sm"
-                    style={{ backgroundColor: '#1a1a1a', color: '#fff', border: '1px solid #262626' }}
+                    style={{ backgroundColor: 'var(--bg-hover)', color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}
                     min="1"
                   />
                 </div>
               </div>
 
               <div>
-                <p className="text-xs mb-1" style={{ color: '#6b7280' }}>Risk Level</p>
+                <p className="text-xs mb-1" style={{ color: 'var(--text-muted)' }}>Risk Level</p>
                 <select
                   value={requestForm.riskLevel}
                   onChange={(e) => setRequestForm({ ...requestForm, riskLevel: e.target.value })}
                   className="w-full p-2 rounded-lg text-sm"
-                  style={{ backgroundColor: '#1a1a1a', color: '#fff', border: '1px solid #262626' }}
+                  style={{ backgroundColor: 'var(--bg-hover)', color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}
                 >
                   <option value="Low">Low Risk</option>
                   <option value="Medium">Medium Risk</option>
@@ -635,7 +635,7 @@ const MobileCopyTrade = ({ onBack }) => {
               onClick={handleRequestMaster}
               disabled={submitting || !requestForm.strategy || !requestForm.riskDisclosureAccepted}
               className="w-full py-3 rounded-xl mt-4 flex items-center justify-center gap-2 font-semibold disabled:opacity-50"
-              style={{ backgroundColor: '#8b5cf6', color: '#fff' }}
+              style={{ backgroundColor: '#8b5cf6', color: 'var(--text-primary)' }}
             >
               {submitting ? <Loader2 className="animate-spin" size={16} /> : <Award size={16} />}
               Submit Application
@@ -700,20 +700,20 @@ const MobileMasterDashboard = ({ masterProfile }) => {
     <div className="space-y-4">
       {/* Stats Cards */}
       <div className="grid grid-cols-2 gap-3">
-        <div className="p-3 rounded-xl" style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a' }}>
-          <p className="text-xs" style={{ color: '#6b7280' }}>Active Followers</p>
-          <p className="text-xl font-bold" style={{ color: '#fff' }}>{profile?.stats?.activeFollowers || 0}</p>
+        <div className="p-3 rounded-xl" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
+          <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Active Followers</p>
+          <p className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>{profile?.stats?.activeFollowers || 0}</p>
         </div>
-        <div className="p-3 rounded-xl" style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a' }}>
-          <p className="text-xs" style={{ color: '#6b7280' }}>Total Trades</p>
-          <p className="text-xl font-bold" style={{ color: '#fff' }}>{profile?.stats?.totalTrades || 0}</p>
+        <div className="p-3 rounded-xl" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
+          <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Total Trades</p>
+          <p className="text-xl font-bold" style={{ color: 'var(--text-primary)' }}>{profile?.stats?.totalTrades || 0}</p>
         </div>
-        <div className="p-3 rounded-xl" style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a' }}>
-          <p className="text-xs" style={{ color: '#6b7280' }}>Win Rate</p>
+        <div className="p-3 rounded-xl" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
+          <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Win Rate</p>
           <p className="text-xl font-bold" style={{ color: '#22c55e' }}>{profile?.stats?.winRate || 0}%</p>
         </div>
-        <div className="p-3 rounded-xl" style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a' }}>
-          <p className="text-xs" style={{ color: '#6b7280' }}>Total Profit</p>
+        <div className="p-3 rounded-xl" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
+          <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Total Profit</p>
           <p className="text-xl font-bold" style={{ color: (profile?.stats?.totalPnL || 0) >= 0 ? '#22c55e' : '#ef4444' }}>
             ${profile?.stats?.totalPnL?.toFixed(2) || '0.00'}
           </p>
@@ -721,18 +721,18 @@ const MobileMasterDashboard = ({ masterProfile }) => {
       </div>
 
       {/* Commission Wallet */}
-      <div className="p-3 rounded-xl" style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a' }}>
-        <h3 className="text-sm font-semibold mb-3 flex items-center gap-2" style={{ color: '#fff' }}>
+      <div className="p-3 rounded-xl" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
+        <h3 className="text-sm font-semibold mb-3 flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
           <Wallet size={16} /> Commission Wallet
         </h3>
         <div className="grid grid-cols-2 gap-3 mb-3">
           <div>
-            <p className="text-xs" style={{ color: '#6b7280' }}>Available</p>
+            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Available</p>
             <p className="text-lg font-bold" style={{ color: '#22c55e' }}>${dashboardData?.wallet?.available?.toFixed(2) || '0.00'}</p>
           </div>
           <div>
-            <p className="text-xs" style={{ color: '#6b7280' }}>Total Earned</p>
-            <p className="text-lg font-bold" style={{ color: '#fff' }}>${dashboardData?.wallet?.totalEarned?.toFixed(2) || '0.00'}</p>
+            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Total Earned</p>
+            <p className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>${dashboardData?.wallet?.totalEarned?.toFixed(2) || '0.00'}</p>
           </div>
         </div>
         <div className="flex gap-2">
@@ -742,7 +742,7 @@ const MobileMasterDashboard = ({ masterProfile }) => {
             onChange={(e) => setWithdrawAmount(e.target.value)}
             placeholder="Amount"
             className="flex-1 p-2 rounded-lg text-sm"
-            style={{ backgroundColor: '#1a1a1a', color: '#fff', border: '1px solid #262626' }}
+            style={{ backgroundColor: 'var(--bg-hover)', color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}
           />
           <button
             onClick={handleWithdraw}
@@ -756,26 +756,26 @@ const MobileMasterDashboard = ({ masterProfile }) => {
       </div>
 
       {/* Profile Info */}
-      <div className="p-3 rounded-xl" style={{ backgroundColor: '#0d0d0d', border: '1px solid #1a1a1a' }}>
-        <h3 className="text-sm font-semibold mb-3" style={{ color: '#fff' }}>Your Profile</h3>
+      <div className="p-3 rounded-xl" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-color)' }}>
+        <h3 className="text-sm font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>Your Profile</h3>
         <div className="space-y-2 text-xs">
           <div className="flex justify-between">
-            <span style={{ color: '#6b7280' }}>Display Name:</span>
-            <span style={{ color: '#fff' }}>{profile?.displayName}</span>
+            <span style={{ color: 'var(--text-muted)' }}>Display Name:</span>
+            <span style={{ color: 'var(--text-primary)' }}>{profile?.displayName}</span>
           </div>
           <div className="flex justify-between">
-            <span style={{ color: '#6b7280' }}>Strategy:</span>
-            <span style={{ color: '#fff' }}>{profile?.strategyType}</span>
+            <span style={{ color: 'var(--text-muted)' }}>Strategy:</span>
+            <span style={{ color: 'var(--text-primary)' }}>{profile?.strategyType}</span>
           </div>
           <div className="flex justify-between">
-            <span style={{ color: '#6b7280' }}>Risk Level:</span>
+            <span style={{ color: 'var(--text-muted)' }}>Risk Level:</span>
             <span style={{ color: profile?.riskLevel === 'Low' ? '#22c55e' : profile?.riskLevel === 'Medium' ? '#fbbf24' : '#ef4444' }}>
               {profile?.riskLevel}
             </span>
           </div>
           <div className="flex justify-between">
-            <span style={{ color: '#6b7280' }}>Commission:</span>
-            <span style={{ color: '#fff' }}>
+            <span style={{ color: 'var(--text-muted)' }}>Commission:</span>
+            <span style={{ color: 'var(--text-primary)' }}>
               {profile?.commissionType === 'profit_share' ? `${profile?.commissionValue}% profit` : `$${profile?.commissionValue}/lot`}
             </span>
           </div>
