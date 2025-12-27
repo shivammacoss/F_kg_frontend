@@ -1,24 +1,48 @@
 import React, { useState, useEffect } from 'react'
 import { Loader2, X } from 'lucide-react'
 import axios from 'axios'
+import { io } from 'socket.io-client'
 
 const MobilePositions = () => {
   const [activeTab, setActiveTab] = useState('positions')
   const [trades, setTrades] = useState([])
   const [loading, setLoading] = useState(true)
+  const [prices, setPrices] = useState({})
 
   useEffect(() => {
     fetchTrades(true)
-    // Auto-refresh every 3 seconds (silent)
-    const interval = setInterval(() => fetchTrades(false), 3000)
+    fetchPrices()
     
-    // Listen for trade events
+    // Set up socket for real-time updates
+    const token = localStorage.getItem('token')
+    if (!token) return
+
+    const socket = io(import.meta.env.VITE_SOCKET_URL || 'http://localhost:5001', { auth: { token } })
+    
+    // Real-time price updates
+    socket.on('priceUpdate', (newPrices) => {
+      setPrices(newPrices)
+    })
+
+    // Real-time trade events - instant sync
+    socket.on('tradeClosed', () => fetchTrades(false))
+    socket.on('orderExecuted', () => fetchTrades(false))
+    socket.on('pendingOrderActivated', () => fetchTrades(false))
+    socket.on('orderCancelled', () => fetchTrades(false))
+    socket.on('orderPlaced', () => fetchTrades(false))
+    socket.on('stopOut', () => fetchTrades(false))
+    
+    // Poll for price updates every 2 seconds
+    const priceInterval = setInterval(fetchPrices, 2000)
+    
+    // Listen for window trade events (from OrderPanel)
     const handleTradeEvent = () => fetchTrades(false)
     window.addEventListener('tradeCreated', handleTradeEvent)
     window.addEventListener('tradeClosed', handleTradeEvent)
     
     return () => {
-      clearInterval(interval)
+      socket.disconnect()
+      clearInterval(priceInterval)
       window.removeEventListener('tradeCreated', handleTradeEvent)
       window.removeEventListener('tradeClosed', handleTradeEvent)
     }
@@ -47,6 +71,39 @@ const MobilePositions = () => {
     }
   }
 
+  const fetchPrices = async () => {
+    try {
+      const token = localStorage.getItem('token')
+      if (!token) return
+      const res = await axios.get('/trades/prices', {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      if (res.data.success) {
+        setPrices(res.data.data)
+      }
+    } catch (err) {
+      // Silent fail for price updates
+    }
+  }
+
+  const calculatePnL = (trade) => {
+    const price = prices[trade.symbol]
+    if (!price) return trade.profit || 0
+    
+    const currentPrice = trade.type === 'buy' ? price.bid : price.ask
+    const priceDiff = trade.type === 'buy' 
+      ? currentPrice - trade.price 
+      : trade.price - currentPrice
+    
+    // Contract size calculation
+    let contractSize = 100000
+    if (trade.symbol.includes('XAU')) contractSize = 100
+    else if (trade.symbol.includes('XAG')) contractSize = 5000
+    else if (trade.symbol.includes('BTC') || trade.symbol.includes('ETH')) contractSize = 1
+    
+    return priceDiff * trade.amount * contractSize
+  }
+
   const closeTrade = async (tradeId) => {
     const token = localStorage.getItem('token')
     if (!confirm('Close this trade?')) return
@@ -63,9 +120,28 @@ const MobilePositions = () => {
     }
   }
 
+  const cancelOrder = async (tradeId) => {
+    const token = localStorage.getItem('token')
+    if (!confirm('Cancel this pending order?')) return
+    try {
+      const res = await axios.put(`/trades/${tradeId}/cancel`, {}, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      if (res.data.success) {
+        window.dispatchEvent(new Event('tradeClosed'))
+        fetchTrades()
+      }
+    } catch (err) {
+      alert(err.response?.data?.message || 'Failed to cancel order')
+    }
+  }
+
   const openTrades = trades.filter(t => t.status === 'open')
   const pendingTrades = trades.filter(t => t.status === 'pending')
   const closedTrades = trades.filter(t => t.status === 'closed')
+  
+  // Calculate total floating P&L for open positions
+  const totalPnL = openTrades.reduce((sum, trade) => sum + calculatePnL(trade), 0)
 
   const tabs = [
     { id: 'positions', label: 'Positions', count: openTrades.length },
@@ -92,6 +168,16 @@ const MobilePositions = () => {
 
   return (
     <div className="h-full flex flex-col" style={{ backgroundColor: 'var(--bg-primary)' }}>
+      {/* Floating P&L Header */}
+      {openTrades.length > 0 && (
+        <div className="flex items-center justify-between px-3 py-2" style={{ backgroundColor: 'var(--bg-secondary)' }}>
+          <span className="text-xs" style={{ color: 'var(--text-muted)' }}>Floating P/L</span>
+          <span className="text-sm font-bold" style={{ color: totalPnL >= 0 ? '#22c55e' : '#ef4444' }}>
+            {totalPnL >= 0 ? '+' : ''}${totalPnL.toFixed(2)}
+          </span>
+        </div>
+      )}
+
       {/* Tabs */}
       <div className="flex" style={{ borderBottom: '1px solid var(--border-color)' }}>
         {tabs.map(tab => (
@@ -140,11 +226,17 @@ const MobilePositions = () => {
                     <X size={14} color="#ef4444" />
                   </button>
                 )}
+                {activeTab === 'pending' && (
+                  <button onClick={() => cancelOrder(trade._id)} className="p-1">
+                    <X size={14} color="#ef4444" />
+                  </button>
+                )}
               </div>
               <div className="flex justify-between text-xs">
                 <span style={{ color: 'var(--text-muted)' }}>{trade.amount} lots @ {trade.price?.toFixed(5)}</span>
-                <span style={{ color: (trade.profit || 0) >= 0 ? '#22c55e' : '#ef4444' }}>
-                  {(trade.profit || 0) >= 0 ? '+' : ''}${(trade.profit || 0).toFixed(2)}
+                <span style={{ color: (activeTab === 'positions' ? calculatePnL(trade) : (trade.profit || 0)) >= 0 ? '#22c55e' : '#ef4444' }}>
+                  {(activeTab === 'positions' ? calculatePnL(trade) : (trade.profit || 0)) >= 0 ? '+' : ''}$
+                  {(activeTab === 'positions' ? calculatePnL(trade) : (trade.profit || 0)).toFixed(2)}
                 </span>
               </div>
             </div>
