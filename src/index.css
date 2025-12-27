@@ -154,4 +154,16 @@ input[type="number"]::-webkit-outer-spin-button {
 
 input[type="number"] {
   -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Mobile viewport height fix for browser address bar */
+html, body {
+  height: 100%;
+}
+
+@supports (height: 100dvh) {
+  html, body {
+    height: 100dvh;
+  }
 }

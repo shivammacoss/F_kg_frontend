@@ -44,7 +44,7 @@ const MobileApp = () => {
   }
 
   return (
-    <div className="h-screen w-screen flex flex-col" style={{ backgroundColor: '#000000' }}>
+    <div className="w-screen flex flex-col" style={{ backgroundColor: '#000000', height: '100dvh', minHeight: '-webkit-fill-available' }}>
       {/* Main Content */}
       <div className="flex-1 overflow-hidden">
         {renderContent()}
