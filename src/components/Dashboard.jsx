@@ -328,8 +328,8 @@ const Dashboard = () => {
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-4">
           <img 
-            src="/F_kg.png" 
-            alt="Forex KG" 
+            src="/Pipxcapital.png" 
+            alt="Pipxcapita" 
             className="h-14 w-auto object-contain"
           />
           <div>

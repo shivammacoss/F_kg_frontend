@@ -38,8 +38,8 @@ const Login = ({ onLogin }) => {
         {/* Top Header with Logo and Back Button */}
         <div className="flex items-center justify-between mb-16">
           <div className="flex items-center gap-3">
-            <img src="/F_kg.png" alt="Forex KG" className="h-10 w-auto" />
-            <span className="text-2xl font-bold text-white tracking-wide">Forex KG</span>
+            <img src="/Pipxcapital.png" alt="Pipxcapita" className="h-10 w-auto" />
+            <span className="text-2xl font-bold text-white tracking-wide">Pipxcapita</span>
           </div>
           <a href="/" className="flex items-center gap-2 px-4 py-2 rounded-full border border-gray-700 text-gray-300 hover:bg-gray-800 transition-colors text-sm">
             Back to website
@@ -97,8 +97,8 @@ const Login = ({ onLogin }) => {
         <div className="max-w-md w-full mx-auto">
           {/* Mobile Logo - Only show on mobile */}
           <div className="lg:hidden flex items-center gap-3 mb-8">
-            <img src="/F_kg.png" alt="Forex KG" className="h-10 w-auto" />
-            <span className="text-2xl font-bold text-white tracking-wide">Forex KG</span>
+            <img src="/Pipxcapital.png" alt="Pipxcapita" className="h-10 w-auto" />
+            <span className="text-2xl font-bold text-white tracking-wide">Pipxcapita</span>
           </div>
 
           {/* Heading */}

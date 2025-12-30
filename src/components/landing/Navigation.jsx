@@ -24,10 +24,10 @@ const Navigation = () => {
       <div className="max-w-[1440px] mx-auto px-[24px] lg:px-[60px] flex items-center justify-between w-full">
         {/* Left Section: Logo & Main Nav */}
         <div className="flex items-center gap-[34px]">
-          <Link to="/" className="flex items-center" aria-label="Forex KG Logo">
+          <Link to="/" className="flex items-center" aria-label="Pipxcapita Logo">
             <img
-              src="/F_kg.png"
-              alt="Forex KG Logo"
+              src="/Pipxcapital.png"
+              alt="Pipxcapita Logo"
               className="h-[70px] w-auto object-contain"
             />
           </Link>

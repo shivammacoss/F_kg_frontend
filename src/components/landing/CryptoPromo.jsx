@@ -7,7 +7,7 @@ const CryptoPromo = () => {
       <div className="absolute inset-0 z-0">
         <img
           src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/test-clones/a30101db-b978-4ecc-8998-3de500870677-robinhood-com/assets/images/landing-crypto-desktop-3.jpeg"
-          alt="Metallic chain detail for Forex KG Crypto"
+          alt="Metallic chain detail for Pipxcapita Crypto"
           className="w-full h-full object-cover object-center"
         />
         {/* Subtle gradient overlay for text legibility */}
@@ -22,7 +22,7 @@ const CryptoPromo = () => {
       {/* Content Container */}
       <div className="max-w-[1440px] mx-auto px-6 md:px-[60px] relative z-10">
         <div className="max-w-[480px]">
-          {/* Forex KG Crypto Logo */}
+          {/* Pipxcapita Crypto Logo */}
           <div className="mb-8 flex items-center gap-2">
             <svg 
               viewBox="0 0 16 16" 
@@ -37,7 +37,7 @@ const CryptoPromo = () => {
               className="text-white text-[24px]"
               style={{ fontFamily: "'Playfair Display', serif" }}
             >
-              Forex KG Crypto
+              Pipxcapita Crypto
             </span>
           </div>
 

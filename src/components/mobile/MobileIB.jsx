@@ -53,7 +53,7 @@ const MobileIB = ({ onBack }) => {
 
   const handleShare = () => {
     if (navigator.share) {
-      navigator.share({ title: 'Join Forex KG', url: profile?.referralLink })
+      navigator.share({ title: 'Join Pipxcapita', url: profile?.referralLink })
     }
   }
 

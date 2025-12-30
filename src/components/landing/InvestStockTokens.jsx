@@ -51,7 +51,7 @@ const InvestStockTokens = () => {
             {/* Detailed Risk Disclaimer */}
             <div className="mt-auto">
               <p className="text-[12px] leading-[1.6] text-black/70">
-                Stock Tokens are derivative contracts between you and Forex KG. They are priced at the prices of the underlying securities without granting rights to them. Stock Tokens carry a high level of risk and are not appropriate for all investors. Investors may lose up to the full amount of their invested capital due to market conditions or the insolvency of Forex KG. Please review the{' '}
+                Stock Tokens are derivative contracts between you and Pipxcapita. They are priced at the prices of the underlying securities without granting rights to them. Stock Tokens carry a high level of risk and are not appropriate for all investors. Investors may lose up to the full amount of their invested capital due to market conditions or the insolvency of Pipxcapita. Please review the{' '}
                 <a 
                   href="#" 
                   className="underline hover:text-black transition-colors"

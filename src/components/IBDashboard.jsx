@@ -128,7 +128,7 @@ const IBDashboard = () => {
             <button
               onClick={() => {
                 if (navigator.share) {
-                  navigator.share({ title: 'Join Forex KG', url: profile?.referralLink })
+                  navigator.share({ title: 'Join Pipxcapita', url: profile?.referralLink })
                 }
               }}
               className="p-3 rounded-xl bg-white/20 hover:bg-white/30 text-white"
