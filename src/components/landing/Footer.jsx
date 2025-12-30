@@ -97,7 +97,7 @@ const Footer = () => {
           {/* Right Side: Detailed Legal Disclaimers */}
           <div className="space-y-6 text-[12px] leading-[1.6]">
             <p>
-              Stock Tokens are derivative contracts between you and Pipxcapita. They are priced at the prices of the underlying securities without granting rights to them. Stock Tokens carry a high level of risk and are not appropriate for all investors. Investors may lose up to the full amount of their invested capital due to market conditions or the insolvency of Pipxcapita. Please review the{' '}
+              Stock Tokens are derivative contracts between you and Pipxcapital. They are priced at the prices of the underlying securities without granting rights to them. Stock Tokens carry a high level of risk and are not appropriate for all investors. Investors may lose up to the full amount of their invested capital due to market conditions or the insolvency of Pipxcapital. Please review the{' '}
               <a href="#" className="underline font-medium">Description of the Services, Financial Instruments, and Risks</a> and the{' '}
               <a href="#" className="underline font-medium">Key Information Document</a> and fully understand all associated risks before investing.
             </p>
@@ -105,11 +105,11 @@ const Footer = () => {
               Perpetual futures are complex derivative products, and trading involves significant risk and is not appropriate for all investors, particularly for perpetuals referencing crypto assets which experience volatile price movements. Further, leveraged trading is risky as it can amplify the speed of your losses and increases the chance of you losing all of your initial investment. Please carefully consider if investing in such financial instruments is appropriate for you in light of your specific experience, risk tolerance, and financial situation. Restrictions and eligibility requirements apply.
             </p>
             <p>
-              Pipxcapita Europe, UAB ("B4X" or "Pipxcapita") (company code: 306377915) is authorized and regulated by the Bank of Lithuania ("BoL") as a financial brokerage firm and a crypto-asset service provider. B4X is an affiliated entity and wholly owned subsidiary of Pipxcapita Markets, Inc. ("Parent Company"). B4X's registered address is: Vilniaus g. 33-201, LT-01402 Vilnius, Lithuania.
+              Pipxcapital Europe, UAB ("B4X" or "Pipxcapital") (company code: 306377915) is authorized and regulated by the Bank of Lithuania ("BoL") as a financial brokerage firm and a crypto-asset service provider. B4X is an affiliated entity and wholly owned subsidiary of Pipxcapital Markets, Inc. ("Parent Company"). B4X's registered address is: Vilniaus g. 33-201, LT-01402 Vilnius, Lithuania.
             </p>
             <p className="font-mono">5070830</p>
             <p>
-              Pipxcapita Markets, Inc. © 2025 Pipxcapita. All rights reserved.
+              Pipxcapital Markets, Inc. © 2025 Pipxcapital. All rights reserved.
             </p>
           </div>
         </div>
@@ -120,7 +120,7 @@ const Footer = () => {
             className="text-[20vw] lg:text-[20.5vw] font-medium leading-[0.8] tracking-tighter"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
-            Pipxcapita
+            Pipxcapital
           </h1>
         </div>
       </div>

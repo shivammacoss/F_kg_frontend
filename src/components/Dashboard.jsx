@@ -329,7 +329,7 @@ const Dashboard = () => {
         <div className="flex items-center gap-4">
           <img 
             src="/Pipxcapital.png" 
-            alt="Pipxcapita" 
+            alt="Pipxcapital" 
             className="h-14 w-auto object-contain"
           />
           <div>
